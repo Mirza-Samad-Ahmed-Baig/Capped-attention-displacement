@@ -2,8 +2,7 @@
 
 Code, frozen protocol, run records and results for the paper
 
-> **Capping realized attention displacement: a preregistered, displacement-calibrated test of TV-capped attention
-> deletion in data-limited biomedical transformers**
+> **CapDrop: capping realized attention displacement in data-limited biomedical transformers**
 > Syeda Anshrah Gillani\*, Mirza Samad Ahmed Baig\*, Shahid Munir Shah, Abdul Akbar Khan, Muhammad Omer Khan,
 > Muhammad Hamzah Siddiqui (\* equal contribution). Submitted to *Neurocomputing*.
 

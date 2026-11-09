@@ -9,7 +9,7 @@ remove heads or layers. DropHead acts on head outputs rather than attention rows
 displacement and we do not include it as an arm. Token-level masking \citep{wu2023tlm} and UniDrop
 \citep{wu2021unidrop} combine several such perturbations. \citet{luo2021dropout} erase the
 entries above a fraction of the row maximum and renormalize. This is the closest precedent for our top-$k$
-deletion candidate, which our earlier preprint \citep{baig2025attentiondrop} also used, without a budget.
+deletion candidate.
 Other methods inject noise into the attention weights: Bayesian Attention Modules \citep{fan2020bam} and
 adaptive noise-augmented attention \citep{amirahmadi2025anaa}. R-Drop \citep{liang2021rdrop} regularizes
 through consistency between two perturbed passes, and Mixout \citep{lee2020mixout} through mixing with the

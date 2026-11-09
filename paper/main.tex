@@ -1,6 +1,7 @@
 \documentclass[preprint,12pt,authoryear]{elsarticle}
 % Neurocomputing (Elsevier) submission draft (venue per the preregistered rule B5). Build: tectonic main.tex (from unified/paper).
 \usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,xcolor}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \newtheorem{proposition}{Proposition}
 \newtheorem{theorem}{Theorem}
@@ -9,8 +10,7 @@
 
 \begin{document}
 \begin{frontmatter}
-\title{Capping realized attention displacement:\\ a preregistered, displacement-calibrated test of
-TV-capped attention deletion\\ in data-limited biomedical transformers}
+\title{CapDrop: capping realized attention displacement\\ in data-limited biomedical transformers}
 
 \author[hd]{Syeda Anshrah Gillani\corref{cor}\fnref{eq}}
 \ead{syeda.gilani@stud.uni-heidelberg.de}
@@ -52,11 +52,11 @@ beyond the strongest tuned control.
 \end{graphicalabstract}
 
 \begin{highlights}
-\item Attention regularizers compared at matched realized displacement, not rate
+\item CapDrop: closed-form attention deletion that caps every row's displacement
+\item Preregistered comparison at matched realized displacement, not nominal rate
 \item Capping the displacement tail beat fixed-mix deletion in a data-limited LM
 \item Tuned DropKey at twice the displacement still beat capped deletion
 \item No attention regularizer improved BiomedBERT fine-tuning on PubMedQA
-\item Preregistered: sealed tests, single unseal, every run and deviation reported
 \end{highlights}
 
 \begin{keyword}
