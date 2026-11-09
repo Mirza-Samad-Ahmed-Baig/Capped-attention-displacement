@@ -79,7 +79,8 @@ LM corpus from the artificial subset's PubMed abstracts.
 
 ## Reproducing
 
-1. **Verify the records.** `python -m unittest discover tests` runs the unit tests. The SHA-256 values in
+1. **Verify the records.** `python -m unittest discover tests` runs the 83 unit tests (all pass in the workspace
+   layout above; `test_attnreg` and `test_pubmedqa_inputs` need BiomedBERT in `domain_distill/models/biomedbert`). The SHA-256 values in
    `FREEZE.json` and `FREEZE_ADDENDUM.jsonl` identify the exact code used for each stage.
 2. **Re-run the analysis only (no GPU).** `results/unsealed.json` holds the scored test outputs, so
    `python analyze.py`, `python figures_results.py`, `python tables_results.py` and `python supplement.py` rebuild
