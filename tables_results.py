@@ -80,7 +80,7 @@ def confirmatory(a):
     body = r"""\begin{table}[t]
 \centering
 \caption{Confirmatory family F1 (Holm over six tests) and secondary family F2. Differences are first arm minus second
-arm; negative favours the first arm. Encoder (E): test Brier, 95\% two-level bootstrap CI, co-criterion =
+arm; lower is better, so a negative difference favours the first arm. Encoder (E): test Brier, 95\% two-level bootstrap CI, co-criterion =
 temperature-scaled Brier difference. LM (L): final-step test NLL (nats/token), 95\% CI by inverting the sign-flip
 test, co-criterion = test NLL at the best-validation step. $p$: exact two-sided sign-flip test over ten folds or seeds
 (minimum 0.002). Student contrasts S-a and S-b use test Brier.}
@@ -119,14 +119,14 @@ def arms_encoder(a):
 \caption{PubMedQA test results by arm (BiomedBERT, ten folds; mean, with the between-fold SD of Brier in parentheses).
 TS-Brier: Brier after temperature scaling fitted on each run's development fold. EUG: evidence-use gap (full minus
 question-only accuracy, points). Flip: flip rate under a label-differing mismatched abstract (\%). $\bar D$: realized mean
-displacement at the end of training. Q0 is trained on questions only and is scored here with the abstract; on its own
+displacement at the end of training. $\downarrow$: lower is better; $\uparrow$: higher is better. Q0 is trained on questions only and is scored here with the abstract; on its own
 input format its accuracy is reported in the text. The majority-class accuracy is 55.2\%.}
 \label{tab:arms_encoder}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{lccccccccc}
 \toprule
-Arm & Brier & TS-Brier & Acc.\ (\%) & Macro-F1 & AUROC & ECE & EUG & Flip & $\bar D$\\
+Arm & Brier$\downarrow$ & TS-Brier$\downarrow$ & Acc.\ (\%)$\uparrow$ & Macro-F1$\uparrow$ & AUROC$\uparrow$ & ECE$\downarrow$ & EUG & Flip & $\bar D$\\
 \midrule
 """ + "\n".join(rows) + r"""
 \bottomrule
@@ -149,13 +149,13 @@ def arms_lm(a):
     body = r"""\begin{table}[t]
 \centering
 \caption{Language-model test NLL by arm (nats/token; mean over ten seeds, between-seed SD in parentheses) at the final
-step and at the best-validation step, and the corresponding perplexity. HBsg is the extension-E8 arm (CapDrop with
+step and at the best-validation step, and the corresponding perplexity ($\downarrow$: lower is better). HBsg is the extension-E8 arm (CapDrop with
 $\alpha$ under stop-gradient); DB is budgeted DropKey (E3).}
 \label{tab:arms_lm}
 \footnotesize
 \begin{tabular}{lccc}
 \toprule
-Arm & Final & Best-validation step & Perplexity (final)\\
+Arm & Final$\downarrow$ & Best-validation step$\downarrow$ & Perplexity (final)$\downarrow$\\
 \midrule
 """ + "\n".join(rows) + r"""
 \bottomrule
@@ -195,7 +195,8 @@ def extensions(a):
 \caption{Extension contrasts (descriptive; unadjusted $p$, verdicts by the H1 rules). Encoder rows: test Brier (E4:
 SciFact development set used once as a test), 95\% two-level bootstrap CI, co-criterion = TS-Brier difference.
 LM rows: final-step test NLL; $^\dagger$90\% paired-$t$ interval used for equivalence (margin $\pm0.010$);
-co-criterion = best-validation-step difference. E2 (failure rates) is reported in the text; E6 was not run (budget).}
+co-criterion = best-validation-step difference. Differences are first arm minus second arm; lower is better, so a
+negative difference favours the first arm. E2 (failure rates) is reported in the text; E6 was not run (budget).}
 \label{tab:extensions}
 \footnotesize
 \setlength{\tabcolsep}{3pt}

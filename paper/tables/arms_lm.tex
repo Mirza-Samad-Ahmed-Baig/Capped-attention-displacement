@@ -2,13 +2,13 @@
 \begin{table}[t]
 \centering
 \caption{Language-model test NLL by arm (nats/token; mean over ten seeds, between-seed SD in parentheses) at the final
-step and at the best-validation step, and the corresponding perplexity. HBsg is the extension-E8 arm (CapDrop with
+step and at the best-validation step, and the corresponding perplexity ($\downarrow$: lower is better). HBsg is the extension-E8 arm (CapDrop with
 $\alpha$ under stop-gradient); DB is budgeted DropKey (E3).}
 \label{tab:arms_lm}
 \footnotesize
 \begin{tabular}{lccc}
 \toprule
-Arm & Final & Best-validation step & Perplexity (final)\\
+Arm & Final$\downarrow$ & Best-validation step$\downarrow$ & Perplexity (final)$\downarrow$\\
 \midrule
 N & 5.3998 (0.0027) & 5.3905 (0.0042) & 221.4\\
 AD@0.20 & 5.3482 (0.0041) & 5.3480 (0.0044) & 210.2\\

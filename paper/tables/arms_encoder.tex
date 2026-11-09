@@ -4,14 +4,14 @@
 \caption{PubMedQA test results by arm (BiomedBERT, ten folds; mean, with the between-fold SD of Brier in parentheses).
 TS-Brier: Brier after temperature scaling fitted on each run's development fold. EUG: evidence-use gap (full minus
 question-only accuracy, points). Flip: flip rate under a label-differing mismatched abstract (\%). $\bar D$: realized mean
-displacement at the end of training. Q0 is trained on questions only and is scored here with the abstract; on its own
+displacement at the end of training. $\downarrow$: lower is better; $\uparrow$: higher is better. Q0 is trained on questions only and is scored here with the abstract; on its own
 input format its accuracy is reported in the text. The majority-class accuracy is 55.2\%.}
 \label{tab:arms_encoder}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \resizebox{\linewidth}{!}{\begin{tabular}{lccccccccc}
 \toprule
-Arm & Brier & TS-Brier & Acc.\ (\%) & Macro-F1 & AUROC & ECE & EUG & Flip & $\bar D$\\
+Arm & Brier$\downarrow$ & TS-Brier$\downarrow$ & Acc.\ (\%)$\uparrow$ & Macro-F1$\uparrow$ & AUROC$\uparrow$ & ECE$\downarrow$ & EUG & Flip & $\bar D$\\
 \midrule
 N & 0.620 (0.022) & 0.483 & 67.0 & 0.503 & 0.718 & 0.303 & 16.0 & 58.2 & --\\
 AD@0.20 & 0.638 (0.028) & 0.497 & 65.6 & 0.507 & 0.713 & 0.306 & 13.0 & 61.4 & 0.200\\

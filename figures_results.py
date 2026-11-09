@@ -62,10 +62,19 @@ def forest(an):
             ax.text(1.01, y, verdict, transform=ax.get_yaxis_transform(), fontsize=7, va="center")
         ax.set_yticks(ys)
         ax.set_yticklabels([r[0] for r in sub], fontsize=7.5)
-        ax.set_xlabel(f"{unit} (negative favours the first arm)", fontsize=8)
+        ax.set_xlabel(f"{unit}, first arm minus second\n(↓ lower is better: negative favours the first arm)", fontsize=8)
         ax.set_title(("Encoder" if enc else "Language model") + f": 95% CI, margin $\\pm${margin}", fontsize=9, loc="left")
         style(ax)
     fig.savefig(os.path.join(OUT, "fig_forest.pdf"))
+
+
+# Arms at the same dose sit on almost the same x, so some labels go to the left of their point.
+LEFT_LABELS_ENC = {"RA@0.10", "DB@0.10", "RA@0.05", "DK@0.05"}
+
+
+def _label(ax, tag, x, y, left=False):
+    ax.annotate(tag, (x, y), fontsize=6.5, xytext=(-6 if left else 6, 0), textcoords="offset points",
+                ha="right" if left else "left", va="center", color="0.15")
 
 
 def loss_vs_displacement(an, cv, uns):
@@ -78,9 +87,9 @@ def loss_vs_displacement(an, cv, uns):
         units = [u for k, u in cv["S1"].get(tag, {}).items() if k.endswith("_1")]
         dbar = np.mean([(u.get("budget") or {}).get("realized_tv", 0.0) for u in units]) if units else 0.0
         axes[0].errorbar(dbar, d["brier"][0], yerr=d["brier"][1] / np.sqrt(max(1, d["n_runs"])), fmt="o", color=FAM_COL[f], ms=5)
-        axes[0].annotate(tag, (dbar, d["brier"][0]), fontsize=6.5, xytext=(3, 3), textcoords="offset points")
+        _label(axes[0], tag, dbar, d["brier"][0], left=tag in LEFT_LABELS_ENC)
     axes[0].set_xlabel("realized mean displacement during training")
-    axes[0].set_ylabel("test Brier (mean $\\pm$ s.e., 10 folds)")
+    axes[0].set_ylabel("test Brier, mean $\\pm$ s.e., 10 folds\n(↓ lower is better)")
     lm = an["descriptive"]["S2"]
     for tag, d in lm.items():
         f = fam(tag)
@@ -89,9 +98,9 @@ def loss_vs_displacement(an, cv, uns):
         units = list(cv["S2"].get(tag, {}).values())
         dbar = np.mean([(u.get("budget") or {}).get("realized_tv", 0.0) for u in units]) if units else 0.0
         axes[1].errorbar(dbar, d["final"][0], yerr=d["final"][1] / np.sqrt(max(1, d["n_runs"])), fmt="o", color=FAM_COL[f], ms=5)
-        axes[1].annotate(tag, (dbar, d["final"][0]), fontsize=6.5, xytext=(3, 3), textcoords="offset points")
+        _label(axes[1], tag, dbar, d["final"][0], left=dbar >= 0.19)
     axes[1].set_xlabel("realized mean displacement during training")
-    axes[1].set_ylabel("test NLL, final step (nats/token)")
+    axes[1].set_ylabel("test NLL at final step (nats/token)\n(↓ lower is better)")
     for ax in axes:
         style(ax)
     fig.savefig(os.path.join(OUT, "fig_loss_vs_displacement.pdf"))
@@ -121,7 +130,7 @@ def lm_curves():
         ax.plot(steps, vals.mean(0), color=FAM_COL.get(f, FAM_COL["HB"]), lw=1.3,
                 ls="--" if f == "HBsg" or tag.endswith("@0.05") else "-", label=f"{tag} (n={len(vals)})")
     ax.set_xlabel("optimizer step")
-    ax.set_ylabel("validation NLL (nats/token)")
+    ax.set_ylabel("validation NLL (nats/token)\n(↓ lower is better)")
     ax.legend(frameon=False, fontsize=6.5, ncol=2)
     style(ax)
     fig.savefig(os.path.join(OUT, "fig_lm_curves.pdf"))
@@ -139,7 +148,7 @@ def strip(uns):
     ax.text(len(tags) - 0.5, 55.6, "majority class (55.2%)", fontsize=7, color="#D55E00", ha="right")
     ax.set_xticks(range(len(tags)))
     ax.set_xticklabels(tags, rotation=45, ha="right", fontsize=7.5)
-    ax.set_ylabel("PubMedQA test accuracy (%)")
+    ax.set_ylabel("PubMedQA test accuracy (%)\n(↑ higher is better)")
     style(ax)
     fig.savefig(os.path.join(OUT, "fig_strip.pdf"))
 
