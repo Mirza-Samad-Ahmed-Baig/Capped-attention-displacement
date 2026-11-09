@@ -1,0 +1,94 @@
+{
+  "utc": "2026-09-24T20:50:58.303565+00:00",
+  "criteria": {
+    "question_exact_normalized": true,
+    "context_word5gram_jaccard_exclude_at": 0.5
+  },
+  "test_labels_read": false,
+  "subsets": {
+    "pqa_artificial": {
+      "records": 211269,
+      "exact_question_matches_by_pqal_split": {
+        "train": 0,
+        "dev": 0,
+        "test": 0
+      },
+      "context_jaccard_at_least": {
+        "0.2": 0,
+        "0.3": 0,
+        "0.5": 0,
+        "0.8": 0
+      },
+      "context_jaccard_at_least_by_pqal_split": {
+        "0.2": {
+          "train": 0,
+          "dev": 0,
+          "test": 0
+        },
+        "0.3": {
+          "train": 0,
+          "dev": 0,
+          "test": 0
+        },
+        "0.5": {
+          "train": 0,
+          "dev": 0,
+          "test": 0
+        },
+        "0.8": {
+          "train": 0,
+          "dev": 0,
+          "test": 0
+        }
+      },
+      "excluded_ids": [],
+      "excluded_count": 0,
+      "jaccard_values_at_least_0.2": []
+    },
+    "pqa_unlabeled": {
+      "records": 61249,
+      "exact_question_matches_by_pqal_split": {
+        "train": 0,
+        "dev": 0,
+        "test": 2
+      },
+      "context_jaccard_at_least": {
+        "0.2": 2,
+        "0.3": 2,
+        "0.5": 2,
+        "0.8": 2
+      },
+      "context_jaccard_at_least_by_pqal_split": {
+        "0.2": {
+          "train": 0,
+          "dev": 0,
+          "test": 2
+        },
+        "0.3": {
+          "train": 0,
+          "dev": 0,
+          "test": 2
+        },
+        "0.5": {
+          "train": 0,
+          "dev": 0,
+          "test": 2
+        },
+        "0.8": {
+          "train": 0,
+          "dev": 0,
+          "test": 2
+        }
+      },
+      "excluded_ids": [
+        "17491578",
+        "18270496"
+      ],
+      "excluded_count": 2,
+      "jaccard_values_at_least_0.2": [
+        0.9379,
+        0.9379
+      ]
+    }
+  }
+}

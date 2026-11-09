@@ -1,0 +1,68 @@
+{
+ "criteria": "Deterministic retrain replay (R14): _detA and _detB must agree within 1e-6 on every recorded dev logit\n    (encoder) or validation NLL and training-loss trace entry (LM), and their sealed test files must\n    be identical (LM: equal SHA-256; encoder: byte-identical once the embedded run_id is swapped,\n    compared in-process with only the boolean kept).\n  Non-deterministic retrain check (R14): |dev metric(original) - dev metric(_detA)| <= the between-unit\n    SD of the N arm (encoder: dev Brier over folds 0-9; LM: final validation NLL over seeds 1-10).\n  Evaluation replay: encoder dev logits identical to the record and sealed test hash identical; LM (the\n    checkpoints are fp16): two evaluations bit-identical to each other, and the replayed validation NLL\n    within 1e-3 of the recorded final value.",
+ "retrain": {
+  "S1_LS@0.2_f3": {
+   "deterministic_max_abs_diff": 0.0,
+   "deterministic_sealed_hashes_equal": true,
+   "deterministic_pass": true,
+   "nondeterministic_abs_diff": 0.01046229576823171,
+   "tolerance_N_between_unit_sd": 0.13683395554928285,
+   "nondeterministic_pass": true
+  },
+  "S1_RA@0.10_f2": {
+   "deterministic_max_abs_diff": 0.0,
+   "deterministic_sealed_hashes_equal": true,
+   "deterministic_pass": true,
+   "nondeterministic_abs_diff": 0.0,
+   "tolerance_N_between_unit_sd": 0.13683395554928285,
+   "nondeterministic_pass": true
+  },
+  "S2_N_s6": {
+   "deterministic_max_abs_diff": 0.0,
+   "deterministic_sealed_hashes_equal": true,
+   "deterministic_pass": true,
+   "nondeterministic_abs_diff": 0.0,
+   "tolerance_N_between_unit_sd": 0.0027865072776984637,
+   "nondeterministic_pass": true
+  },
+  "S2_N_s3": {
+   "deterministic_max_abs_diff": 0.0,
+   "deterministic_sealed_hashes_equal": true,
+   "deterministic_pass": true,
+   "nondeterministic_abs_diff": 0.0,
+   "tolerance_N_between_unit_sd": 0.0027865072776984637,
+   "nondeterministic_pass": true
+  }
+ },
+ "evalreplay": {
+  "encoder": {
+   "S1_N_f0": {
+    "dev_max_abs_diff": 0.0,
+    "sealed_hash_equal": true
+   },
+   "S1_LS@0.2_f3_detA": {
+    "dev_max_abs_diff": 0.056152400000000005,
+    "sealed_hash_equal": false
+   },
+   "S1_RA@0.10_f2_detA": {
+    "dev_max_abs_diff": 0.0,
+    "sealed_hash_equal": true
+   }
+  },
+  "lm": {
+   "S2_base2_N_lr5e-4_s1": {
+    "replays_bit_identical": true,
+    "val_nll_abs_diff_vs_record": 1.5166584841352915e-06
+   },
+   "S2_N_s3_detA": {
+    "replays_bit_identical": true,
+    "val_nll_abs_diff_vs_record": 2.1629966138192458e-05
+   },
+   "S2_N_s6_detA": {
+    "replays_bit_identical": true,
+    "val_nll_abs_diff_vs_record": 2.179048224615343e-05
+   }
+  }
+ },
+ "audit_py_sha256": "aa563a26530fcf6e5c7ebc1489be371f21decbeba4db017a33fef867bacc61ff"
+}

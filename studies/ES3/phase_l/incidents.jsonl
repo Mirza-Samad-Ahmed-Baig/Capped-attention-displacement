@@ -1,0 +1,1 @@
+{"utc": "2026-10-15T11:10:41.240928+00:00", "run_id": "ES3_S-HU@0.10_f3", "event": "run stopped mid-training (about 3 of 8 minutes) at the authors request because the laptop was overheating without air conditioning; no result, sealed or partial file written; rerun once from scratch with the same seed on resume", "files_deleted": []}

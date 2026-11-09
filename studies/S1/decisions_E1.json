@@ -1,0 +1,10 @@
+{
+ "rule": "E1 alpha: lowest mean dev Brier folds 0-1, ties -> lower alpha",
+ "selected_alpha": 0.5,
+ "deleted_unopened": [
+  "S1_RDROP@0.1_f0.json",
+  "S1_RDROP@0.1_f1.json",
+  "S1_RDROP@1.0_f0.json",
+  "S1_RDROP@1.0_f1.json"
+ ]
+}

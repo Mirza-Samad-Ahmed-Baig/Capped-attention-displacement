@@ -1,0 +1,21 @@
+{
+ "utc": "2026-11-08T22:38:20.695926+00:00",
+ "device": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+ "tokens": 384,
+ "teacher_size_12_layers": {
+  "parameters": 108891648,
+  "non_embedding_parameters": 85054464,
+  "fp16_megabytes": 217.783296,
+  "gpu_batch1_latency_ms": 11.122200055979192,
+  "gpu_batch32_seq_per_s": 165.73290841105037,
+  "cpu4_batch1_latency_ms": 225.73929990176111
+ },
+ "student_6_layers": {
+  "parameters": 66364416,
+  "non_embedding_parameters": 42527232,
+  "fp16_megabytes": 132.728832,
+  "gpu_batch1_latency_ms": 5.923049990087748,
+  "gpu_batch32_seq_per_s": 326.16284691206425,
+  "cpu4_batch1_latency_ms": 111.90079990774393
+ }
+}

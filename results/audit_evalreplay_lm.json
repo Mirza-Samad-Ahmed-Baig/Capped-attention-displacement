@@ -1,0 +1,14 @@
+{
+ "S2_base2_N_lr5e-4_s1": {
+  "replays_bit_identical": true,
+  "val_nll_abs_diff_vs_record": 1.5166584841352915e-06
+ },
+ "S2_N_s3_detA": {
+  "replays_bit_identical": true,
+  "val_nll_abs_diff_vs_record": 2.1629966138192458e-05
+ },
+ "S2_N_s6_detA": {
+  "replays_bit_identical": true,
+  "val_nll_abs_diff_vs_record": 2.179048224615343e-05
+ }
+}

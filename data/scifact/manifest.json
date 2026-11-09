@@ -1,0 +1,21 @@
+{
+ "utc": "2026-09-27T08:13:31.972327+00:00",
+ "source": "https://scifact.s3-us-west-2.amazonaws.com/release/latest/data.tar.gz",
+ "etag_md5": "cb7da4d8609e30f2c7483b61aa447f7e",
+ "bytes": 3115079,
+ "license": "claims CC BY 4.0; abstracts ODC-By 1.0 (SciFact LICENSE.md)",
+ "train_pairs": 919,
+ "train_label_counts": {
+  "yes": 370,
+  "no": 194,
+  "maybe": 355
+ },
+ "dev_pairs": 339,
+ "dev_labels_written_only_to": "sealed_labels/dev_labels.json",
+ "sha256": {
+  "train_pairs.jsonl": "fb3deadfba0bc86448f4c5afc8b7dde0e5742037272c5c9bd6e3e66efa5fba5e",
+  "sealed_inputs/dev_inputs.jsonl": "c553c11dad17bcc182b6e7af6eb20e57091a86a97514a2571803fae0e45168a7",
+  "sealed_inputs/dev_donors.json": "4127e1e0bd60b03e568725eddd885589ae984560e0f15dfa1c334c1be014e04f",
+  "sealed_labels/dev_labels.json": "a54354ab827c036a83ad5fd60acf62a2b9a05a8344a9ba512a9be97385e1565b"
+ }
+}

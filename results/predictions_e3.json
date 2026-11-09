@@ -1,0 +1,17 @@
+{
+ "rule": "E3: budgeted DropKey (all visible keys eligible, p=0.5); tau with E[min(m,tau)]=0.10; exact over top-8 keys, normal approximation for the remaining keys (validated vs Monte Carlo to 1e-4)",
+ "encoder": {
+  "p": 0.5,
+  "tau": 0.10280190760759392,
+  "reachable": true,
+  "Ed": 0.10000000000000005,
+  "method": "exact top-8 + normal tail approximation"
+ },
+ "lm": {
+  "p": 0.5,
+  "tau": 0.10051269661594905,
+  "reachable": true,
+  "Ed": 0.10000000000000063,
+  "method": "exact top-8 + normal tail approximation"
+ }
+}

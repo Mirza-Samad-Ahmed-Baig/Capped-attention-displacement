@@ -1,0 +1,14 @@
+{
+ "rule": "first two run ids by sha256(FREEZE sha + ':' + run_id)",
+ "freeze_sha256": "937772c096c4a91f9d128ae45888e486d325210eb368ffece2edcba2fbe23930",
+ "chosen": {
+  "S1": [
+   "S1_LS@0.2_f3",
+   "S1_RA@0.10_f2"
+  ],
+  "S2": [
+   "S2_N_s6",
+   "S2_N_s3"
+  ]
+ }
+}

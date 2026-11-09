@@ -1,0 +1,14 @@
+{
+ "S1_N_f0": {
+  "dev_max_abs_diff": 0.0,
+  "sealed_hash_equal": true
+ },
+ "S1_LS@0.2_f3_detA": {
+  "dev_max_abs_diff": 0.0,
+  "sealed_hash_equal": true
+ },
+ "S1_RA@0.10_f2_detA": {
+  "dev_max_abs_diff": 0.0,
+  "sealed_hash_equal": true
+ }
+}

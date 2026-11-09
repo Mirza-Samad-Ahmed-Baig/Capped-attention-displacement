@@ -1,0 +1,45 @@
+{
+  "utc": "2026-09-24T20:49:54.379236+00:00",
+  "source": "https://huggingface.co/datasets/qiaojin/PubMedQA",
+  "revision": "9001f2853fb87cab8d220904e0de81ac6973b318",
+  "license": "MIT (dataset repository)",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "files": {
+    "pqa_artificial": {
+      "rows": 211269,
+      "columns": [
+        "pubid",
+        "question",
+        "context",
+        "long_answer",
+        "final_decision"
+      ],
+      "label_counts": {
+        "yes": 196144,
+        "no": 15125
+      },
+      "jsonl": "pqa_artificial.jsonl",
+      "jsonl_sha256": "034981a4daea1947179ec73cf21df338302fc62f41f3fe4dca28a579b5cf9dde",
+      "unique_ids": 211269,
+      "parquet": "data\\raw\\pqa_artificial.parquet",
+      "parquet_bytes": 233411194,
+      "parquet_sha256": "cdee2d3c01369f47d2ea7b89cd32ee64b142cc0debcb863bf39b3a81a3cece05"
+    },
+    "pqa_unlabeled": {
+      "rows": 61249,
+      "columns": [
+        "pubid",
+        "question",
+        "context",
+        "long_answer"
+      ],
+      "label_counts": {},
+      "jsonl": "pqa_unlabeled.jsonl",
+      "jsonl_sha256": "74943028aa494aeae077ee34b783c55650aba2c75a35279f34d1ec0d189fe8bc",
+      "unique_ids": 61249,
+      "parquet": "data\\raw\\pqa_unlabeled.parquet",
+      "parquet_bytes": 66010017,
+      "parquet_sha256": "2f390ea5e6e3dc53b2736a52be2f594e05f5d8a599c3de754ad72f1068251e6e"
+    }
+  }
+}

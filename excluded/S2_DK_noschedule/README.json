@@ -1,0 +1,14 @@
+{
+ "utc": "2026-09-29T11:22:02.711371+00:00",
+ "reason": "One-off remediation (2026-09-29) of the LM DropKey implementation bug: lm_runner ignored the DK\narm's `layer_schedule` (\"dropkey_linear\"), so the three S2 DK tuning runs used p_max in every layer\n(realized mean displacement ~1.7x the calibrated level). Outcome-blind: no test file is opened.",
+ "moved": [
+  "runs/S2_DK@0.05_s1.json",
+  "runs/S2_DK@0.10_s1.json",
+  "runs/S2_DK@0.20_s1.json",
+  "sealed/S2_DK@0.20_s1_final.json",
+  "sealed/S2_DK@0.20_s1_best.json",
+  "decisions_levels_superseded.json",
+  "finals_registry_superseded.json"
+ ],
+ "status": "excluded from every analysis; reported in the run inventory; sealed files never opened"
+}

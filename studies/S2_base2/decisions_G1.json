@@ -1,0 +1,7 @@
+{
+ "rule": "G1",
+ "lr_winner": "S2_base2_N_lr5e-4_s1",
+ "lr": 0.0005,
+ "overfits": false,
+ "action": "halve corpus to >=500k tokens, 16 epochs, redo base tuning once"
+}

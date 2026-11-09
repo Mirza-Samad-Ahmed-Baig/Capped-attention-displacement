@@ -1,0 +1,111 @@
+{
+ "utc": "2026-09-25T15:12:00.170107+00:00",
+ "protocol_sha256": "937772c096c4a91f9d128ae45888e486d325210eb368ffece2edcba2fbe23930",
+ "runs": [
+  {
+   "run_id": "S2_base_N_lr5e-4_s1",
+   "study": "S2",
+   "seed": 2001,
+   "arm": {
+    "kind": "none"
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 1000000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   },
+   "census_at": [
+    0.1,
+    0.25,
+    0.5,
+    1.0
+   ],
+   "save_checkpoint": "C:\\Attentiondrop__Attention_dropS_\\unified\\studies\\S2_base\\ckpt\\S2_base_N_lr5e-4_s1.pt"
+  },
+  {
+   "run_id": "S2_base_N_lr1e-3_s1",
+   "study": "S2",
+   "seed": 2001,
+   "arm": {
+    "kind": "none"
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 1000000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.001
+   },
+   "census_at": [
+    0.1,
+    0.25,
+    0.5,
+    1.0
+   ],
+   "save_checkpoint": "C:\\Attentiondrop__Attention_dropS_\\unified\\studies\\S2_base\\ckpt\\S2_base_N_lr1e-3_s1.pt"
+  },
+  {
+   "run_id": "S2_base_N_lr2e-3_s1",
+   "study": "S2",
+   "seed": 2001,
+   "arm": {
+    "kind": "none"
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 1000000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.002
+   },
+   "census_at": [
+    0.1,
+    0.25,
+    0.5,
+    1.0
+   ],
+   "save_checkpoint": "C:\\Attentiondrop__Attention_dropS_\\unified\\studies\\S2_base\\ckpt\\S2_base_N_lr2e-3_s1.pt"
+  }
+ ]
+}

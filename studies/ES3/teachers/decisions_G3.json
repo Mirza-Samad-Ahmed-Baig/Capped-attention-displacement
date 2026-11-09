@@ -1,0 +1,6 @@
+{
+ "rule": "G3",
+ "pooled_privileged_oof_accuracy_T0_T4": 0.708,
+ "examples": 250,
+ "action": "proceed with students"
+}

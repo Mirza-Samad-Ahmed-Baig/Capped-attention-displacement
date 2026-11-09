@@ -1,0 +1,43 @@
+{
+  "utc": "2026-09-24T21:08:49.999079+00:00",
+  "salt": "unified-lm-v1",
+  "vocab": 16384,
+  "eot_id": 0,
+  "source": "data/pqa_artificial.jsonl",
+  "tokenizer_sha256": "5827ad3c51d3fc7169486807dee948084ebab7c2d1a92f4e21b8fff101bf4f55",
+  "heldout_near_duplicates_removed": {
+    "val": 6,
+    "test": 2
+  },
+  "removed_ids": {
+    "val": [
+      "14708079",
+      "15454833",
+      "16303959",
+      "20344822",
+      "25223696",
+      "25508026"
+    ],
+    "test": [
+      "26567040",
+      "27414691"
+    ]
+  },
+  "splits": {
+    "train": {
+      "documents": 207114,
+      "tokens": 72657257,
+      "sha256": "450610c3da8811ee081019fbe0f1ec7e8b260200ccc0b9d04efc99279c80b998"
+    },
+    "val": {
+      "documents": 2049,
+      "tokens": 725568,
+      "sha256": "b1e50f10d2125766173fd32467f9e97f75cf3d4003b90aa8497be7c18ed330ed"
+    },
+    "test": {
+      "documents": 2098,
+      "tokens": 736882,
+      "sha256": "685a74ea1715d2238feefeb996dc282145a0a1443c4afbe80a685c1a0d004380"
+    }
+  }
+}

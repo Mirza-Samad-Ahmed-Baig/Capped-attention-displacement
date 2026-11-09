@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.log
+*.aux
+*.blg
+*.out
+*.xdv
+*.pt
+ckpt/
+models/
+data/raw/
+data/lm/train.bin
+data/pqa_unlabeled.jsonl
+data/pqa_artificial.jsonl
+STOP
+GOVERNOR_STOP

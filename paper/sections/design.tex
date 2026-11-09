@@ -1,0 +1,123 @@
+% Preregistered design (outcome-independent). Numbers in \emph{} are protocol constants.
+\section{Preregistered design}\label{sec:design}
+
+\subsection{Protocol, held-out data and integrity}
+All experiments follow a protocol that was frozen, together with the code and data manifests,
+before any outcome run (SHA-256 of the protocol \texttt{0b0faeb4\ldots}; the full text and every
+deviation are in the supplement). The protocol fixes the arms, calibration rule, levels, seeds,
+selection rules, endpoints, tests, margins and a compute budget with prespecified cut rules; it
+also fixes an outcome$\to$claim table so that the headline cannot follow the results. Every declared
+run is reported; no seed is replaced.
+
+Two held-out sets are used once, after all declared runs are complete. \textbf{PubMedQA.} The official
+500-question test split of the expert-labelled subset PQA-L \citep{jin2019pubmedqa} is on its second use:
+it was scored once earlier in an unrelated pilot of this project with a different model family and no
+selection, which we disclose. Runs score label-free test inputs in-process and write logits into
+write-once sealed files; labels are read once by the unsealing script. Selection uses a seeded,
+stratified 10-fold split ($450/50$) of the other 500 PQA-L questions. \textbf{Language modelling.} A fresh
+test stream of 736{,}882 tokens (2{,}098 PubMed abstracts), split from the training corpus by a salted
+hash of the PubMed identifier and never evaluated before. We audited every auxiliary corpus for
+near-duplicates of all 1{,}000 PQA-L questions (normalized-question equality or word 5-gram Jaccard
+$\ge0.5$ on the abstract). This found two records of the unlabelled PQA-U subset that duplicate
+official test questions under different PubMed identifiers; they were excluded.
+
+\subsection{Regimes}
+\textbf{S1: low-resource fine-tuning.} BiomedBERT (base, abstracts and full text; 109M parameters)
+\citep{gu2021domain} is fine-tuned on the 450 training questions of each fold (question and abstract as
+one segment, at most 512 tokens) with a stabilized recipe for every arm: bias-corrected AdamW,
+learning rate $2\times10^{-5}$, batch 16, 20 epochs, 10\% warm-up and linear decay
+\citep{mosbach2021stability}, final checkpoint, no early stopping.
+\textbf{S2: data-limited language modelling.} A 23.3M-parameter pre-LN causal transformer (6 layers,
+width 384, context 256, byte-level BPE with 16{,}384 tokens fitted on training text) is trained from
+scratch on a fixed prefix of the PubMed training stream for many epochs (Section~\ref{sec:results};
+the prespecified overfitting gate and its outcome are reported there).
+
+\subsection{Arms and displacement calibration}
+Every attention arm replaces attention-probability dropout; hidden and residual dropout are fixed per
+regime, so the reference arm N means ``no attention-specific regularization''. All arms share the same
+materialized attention path, initialization, data order and perturbation noise stream: noise is a
+counter-based function of (seed, step, layer, microbatch), which gives common random numbers across arms
+and identical masks under gradient-checkpoint recomputation.
+
+Nominal rates are not comparable across families (Proposition~\ref{prop:laws}), so each family is
+\emph{calibrated} to the same realized mean displacement, $\ell=0.05$, $0.10$ or $0.20$, using the exact
+expectations of Section~\ref{sec:theory}, computed on a census of eval-mode attention rows taken before
+any outcome was observed: the pretrained encoder on 256 unlabelled PubMedQA inputs, and the tuned
+reference LM at 10, 25, 50 and 100\% of training. The families are attention dropout (AD), DropKey-style
+key deletion with its linear depth schedule (DK) \citep{li2023dropkey}, Relaxed Attention (RA)
+\citep{lohrenz2023relaxed}, unbudgeted top-4 deletion (HU), and three arms that isolate the cap at the
+same candidate: CapDrop (HB; $p=0.5$ unless a level requires more, $\tau$ calibrated), fixed-$\alpha$
+deletion (HF; same $p$, draws and mean displacement as HB, constant $\alpha$) and TV-budgeted
+relaxation (RB). Together, RA, RB, HF and HB form a $2\times2$ design
+\{uniform candidate, deletion candidate\}$\times$\{fixed, capped mixing\} at $\ell=0.10$.
+Tuned controls without attention perturbation complete the comparison: Mixout
+\citep{lee2020mixout} and label smoothing in S1, residual dropout in S2.
+
+\subsection{Endpoints, tests and predictions}
+The primary S1 endpoint is the per-run Brier score on the official test set, with temperature-scaled
+Brier (temperature fitted on each run's 50-question development fold) as a co-criterion, so that a
+calibration-only effect cannot be reported as an improvement; accuracy, macro-F1 and AUROC are
+secondary. The S2 endpoint is test negative log-likelihood (nats per token) at the final step and at the
+best-validation step (co-primary). The confirmatory family has six contrasts, each tested with an exact
+two-sided sign-flip test over ten folds (S1) or ten seeds (S2) and Holm-adjusted at $\alpha=0.05$:
+H1, CapDrop versus fixed-$\alpha$ deletion at $\ell=0.10$ (the cap itself); H2, CapDrop versus the tuned
+Relaxed Attention, the fixed-coefficient member of the same mixture family; H3, CapDrop versus the strongest tuned control. Null claims are
+made only by equivalence (two one-sided tests; margins $\pm0.015$ Brier and $\pm0.01$ nats/token).
+Directional expectations were registered from the census separation
+$\delta=(S_2^{\mathrm{HF}}-S_2^{\mathrm{HB}})/\ell^2$ (Proposition~\ref{thm:cx}).
+
+\subsection{Evidence-use diagnostics}
+Every S1 model is also evaluated on the development fold and the test set with (i) the question only,
+(ii) the abstract of a different question whose gold label differs (three stratified derangements,
+matched on abstract length), and (iii) the RESULTS section deleted. We report the evidence-use gap
+(full minus question-only accuracy), the flip rate under mismatched evidence and the rate at which
+predictions follow the donor abstract's label. A question-only model trained without abstracts (Q0) and
+the earlier LoRA recipe that collapsed to the majority class (L0) are reported as reference points.
+
+\subsection{Manipulation check and audits}
+Before any final run, the realized mean displacement recorded on the GPU during the tuning runs must match
+across the capped and uncapped deletion arms. The ratios HB/HF and HB/HU at $\ell=0.10$ must lie in $[0.8,1.25]$;
+otherwise calibration is redone once, on the average of the pretrained census and a fine-tuned census. After the core
+runs, two runs per regime, chosen by a hash of the frozen protocol, are retrained twice in deterministic mode.
+The two replays must agree within $10^{-6}$ and produce identical sealed files, and they must agree with the original
+non-deterministic run within the between-unit standard deviation of the reference arm. Evaluation is replayed
+bit-exactly from saved checkpoints.
+
+\subsection{Preregistered extensions}
+Extensions were declared with fixed run counts and a fixed order. Each one started only if its full expected cost
+fitted under a hard cap of 90 GPU-hours, a rule that depends on budget and never on outcomes. Every extension that started
+finished before the single unseal.
+\begin{itemize}
+\item \textbf{P1 (second seed).} HB and HF at $\ell=0.10$ are rerun on all ten folds with a second seed. H1-E then
+uses the per-fold mean over both seeds.
+\item \textbf{E2 (fragile recipe).} This extension uses the original BERT fine-tuning recipe, which is known to be unstable
+on small datasets \citep{mosbach2021stability}: Adam without bias correction, three epochs, two segment embeddings. Attention dropout, CapDrop and Mixout each get 20 runs (ten folds, two seeds). A run
+fails if its test accuracy is at most the majority rate (55.2\%). Failure rates are compared with attention dropout by
+a one-sided permutation test stratified by fold, Holm-corrected over the two comparisons. ``No reduction'' is claimed
+only if the upper 90\% bound of the reduction is below 25 percentage points. The comparison is inconclusive if
+attention dropout fails in fewer than 30\% of its runs.
+\item \textbf{E-S3 (distilled students).} Each fold has a teacher that also sees the abstract's conclusion. It is
+never evaluated on the test set, and it must reach 65\% pooled out-of-fold accuracy on folds 0--4. A six-layer
+student (layers 0, 2, \dots, 10 of BiomedBERT; 66.4M parameters) is distilled on 10{,}000 unlabelled PubMedQA questions.
+It is then fine-tuned on the fold with cross-entropy plus a distillation term. The student arms are no attention
+regularization, HU, HB and HF, all calibrated on a student census, plus a student trained without distillation. The
+contrasts HB$-$HU and HB$-$N enter the secondary family only if the reference student reaches 57\% out-of-fold
+accuracy on folds 0--4. Retention relative to the full-size model and deployment cost are reported.
+\item \textbf{E5 (second encoder).} BioLinkBERT-base \citep{yasunaga2022linkbert} runs with a new census. The arms are
+the reference, attention dropout at its S1-selected level, HU and HB, on the same ten folds.
+\item \textbf{E4 (second task).} SciFact \citep{wadden2020scifact} uses oracle claim--abstract pairs with three labels,
+trained on 919 pairs for ten epochs. The arms are the reference, the S1-selected Relaxed Attention, HU and HB, with ten
+seeds. The 339 development pairs serve as a sealed one-shot test, because the official test labels are not public.
+Claim-only inputs and deletion of the gold rationale sentences give the diagnostics.
+\item \textbf{E1 (R-Drop).} R-Drop \citep{liang2021rdrop} is tuned on folds 0--1 over $\alpha\in\{0.1,0.5,1\}$ and compared
+with CapDrop on all ten folds.
+\item \textbf{E3 (targeting).} Budgeted DropKey applies the same TV cap to a candidate that deletes any key, not
+only the four highest-weighted. It is calibrated to $\ell=0.10$ and compared with CapDrop in S1 and S2.
+\end{itemize}
+Replication in E4 and E5 is judged on HB$-$HU by the rules of H1-E. Apart from the two student contrasts, extension
+contrasts are reported with unadjusted $p$-values as descriptive evidence.
+Two further extensions were declared last. E6 is a single-epoch LM on an 8.0M-token prefix, a regime that does not overfit.
+E8 is the CapDrop LM arm with $\alpha$ computed under stop-gradient, on ten seeds. Its forward pass and deletion
+draws are identical to CapDrop's, so it isolates the gradient path through $\alpha$, which HF lacks. After E3, 85.1 GPU-hours had been used.
+E6 (5.6 expected GPU-hours) did not fit under the cap and was not run. E8 (1.25 GPU-hours) fitted and was run. Its implementation, tests and
+analysis rule (the H1-L rules, unadjusted, descriptive) were recorded in the freeze addendum before its first run.

@@ -1,0 +1,1 @@
+{"utc": "2026-09-25T21:17:13.780337+00:00", "run_id": "S1_HU@0.20_f0", "event": "non-finite gradient caused by an implementation bug (see FREEZE_ADDENDUM), not by the method; rerun once with the same seed after the fix", "files_deleted": []}

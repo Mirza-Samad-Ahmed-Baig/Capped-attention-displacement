@@ -1,0 +1,128 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+% Neurocomputing (Elsevier) submission draft (venue per the preregistered rule B5). Build: tectonic main.tex (from unified/paper).
+\usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,xcolor}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
+\journal{Neurocomputing}
+
+\begin{document}
+\begin{frontmatter}
+\title{Capping realized attention displacement:\\ a preregistered, displacement-calibrated test of
+TV-capped attention deletion\\ in data-limited biomedical transformers}
+
+\author[hd]{Syeda Anshrah Gillani\corref{cor}\fnref{eq}}
+\ead{syeda.gilani@stud.uni-heidelberg.de}
+\author[dan]{Mirza Samad Ahmed Baig\fnref{eq}}
+\author[sz]{Shahid Munir Shah}
+\author[ai]{Abdul Akbar Khan}
+\author[fx]{Muhammad Omer Khan}
+\author[hu]{Muhammad Hamzah Siddiqui}
+\cortext[cor]{Corresponding author.}
+\fntext[eq]{These authors contributed equally to this work.}
+\affiliation[hd]{organization={Heidelberg University},city={Heidelberg},country={Germany}}
+\affiliation[dan]{organization={Danat Fz LLC (owned by Argaam)},city={Karachi},country={Pakistan}}
+\affiliation[sz]{organization={SZABIST University, Gharo Campus},country={Pakistan}}
+\affiliation[ai]{organization={Argaam Investment},city={Riyadh},country={Saudi Arabia}}
+\affiliation[fx]{organization={Fortanixor Technologies F.Z.E},country={United Arab Emirates}}
+\affiliation[hu]{organization={Hamdard University},city={Karachi},country={Pakistan}}
+
+\begin{abstract}
+Attention regularizers such as attention dropout, DropKey and Relaxed Attention are set by nominal rates. A head's
+output, however, is changed by the realized displacement of its attention row, $d=\tfrac12\lVert\tilde a-a\rVert_1$,
+which, for targeted perturbations, depends on attention concentration. Methods compared at equal rates therefore
+receive unequal doses, and no rate controls the tail of the perturbation. We derive exact expected displacements for
+common attention perturbations and propose CapDrop: top-$k$ key deletion whose closed-form mixing coefficient caps
+every row's displacement at a budget $\tau$. At a given mean displacement, CapDrop is the least dispersed rule in its
+class. In a preregistered study, every method is calibrated to the same realized mean displacement, and the test sets
+stay sealed until all 500 test-scored runs are complete. The regimes are BiomedBERT fine-tuned on 450 PubMedQA
+questions per fold and a language model trained from scratch on PubMed abstracts. In the language model, CapDrop
+reduced test negative log-likelihood by 0.045 nats/token versus fixed-coefficient deletion with identical deletion
+draws, and by 0.032 versus tuned Relaxed Attention (multiplicity-corrected $p=0.012$; all ten seeds), contrary to our
+registered expectation. A stop-gradient ablation attributes a fifth of the first gain to the gradient through the cap.
+Tuned DropKey at twice the displacement remained better, by 0.058 nats/token. On PubMedQA, no attention regularizer
+beat the unregularized model, and label smoothing's advantage largely vanished after temperature scaling. Matching
+realized displacement exposes effects that nominal rates hide. Capping its tail improves targeted deletion, but not
+beyond the strongest tuned control.
+\end{abstract}
+
+\begin{graphicalabstract}
+\includegraphics[width=\linewidth]{figures/graphical_abstract.pdf}
+\end{graphicalabstract}
+
+\begin{highlights}
+\item Attention regularizers compared at matched realized displacement, not rate
+\item Capping the displacement tail beat fixed-mix deletion in a data-limited LM
+\item Tuned DropKey at twice the displacement still beat capped deletion
+\item No attention regularizer improved BiomedBERT fine-tuning on PubMedQA
+\item Preregistered: sealed tests, single unseal, every run and deviation reported
+\end{highlights}
+
+\begin{keyword}
+attention regularization \sep total variation \sep dropout \sep low-resource fine-tuning \sep
+biomedical question answering \sep preregistration
+\end{keyword}
+\end{frontmatter}
+
+\input{sections/intro}
+\input{sections/related}
+\input{sections/theory}
+\input{sections/design}
+
+\section{Results}\label{sec:results}
+\input{sections/census}
+\input{sections/results}
+
+\input{sections/discussion}
+
+\section{Conclusion}\label{sec:conclusion}
+Matching attention regularizers on realized displacement, rather than on nominal rate, makes their comparison a
+comparison of form at a fixed dose. Under that matching, the tail of the displacement mattered in a data-limited language
+model. Uncapped top-4 deletion was neutral or harmful there, and capped deletion helped: it beat fixed-coefficient
+deletion, unbudgeted deletion and tuned Relaxed Attention. A stronger tuned competitor at a higher dose still did better. In
+low-resource fine-tuning of a pretrained biomedical encoder, no attention regularizer, CapDrop included, made a
+detectable difference, and the one significant effect, from label smoothing, was calibration. Our registered expectation
+for the language model was wrong, and every run is reported. These results support a narrow claim about the tail of
+the displacement in one regime. They do not support CapDrop as a general-purpose replacement for tuned attention
+regularization.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Syeda Anshrah Gillani} and \textbf{Mirza Samad Ahmed Baig} contributed equally: Conceptualization, Methodology,
+Software, Validation, Formal analysis, Investigation, Resources, Data curation, Writing -- original draft, Writing --
+review \& editing, Visualization, Supervision, Project administration.
+\textbf{Shahid Munir Shah}: Methodology, Writing -- original draft, Writing -- review \& editing.
+\textbf{Abdul Akbar Khan}: Software, Validation, Formal analysis, Writing -- review \& editing.
+\textbf{Muhammad Omer Khan}: Software, Validation, Formal analysis, Writing -- review \& editing.
+\textbf{Muhammad Hamzah Siddiqui}: Software (deployment), Visualization, Writing -- review \& editing.
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit
+sectors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have
+appeared to influence the work reported in this paper.
+
+% Generative-AI declaration: the authors will provide it in the journal's submission system.
+% Draft kept for reference:
+% \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+% During the preparation of this work the authors used Codex (OpenAI) and Claude Code (Anthropic) to audit an
+% earlier draft, implement and test the code, run the experiments, search the literature and draft the
+% manuscript. After using these tools, the authors reviewed and edited the content as needed and take full
+% responsibility for the content of the published article. \TODO{authors to confirm this statement}
+
+\section*{Data and code availability}
+The frozen protocol (Parts A and B), its freeze record and addendum, all code, the run registries and ledgers,
+every run record, the sealed-evaluation hashes, the census files, the deviation log and the analysis scripts
+will be made publicly available at
+\url{https://github.com/Mirza-Samad-Ahmed-Baig/Capped-attention-displacement}; until then, the repository is
+available to the editor and reviewers on request. The datasets are public and are used under their licences:
+PubMedQA \citep{jin2019pubmedqa}, SciFact \citep{wadden2020scifact} (claims CC BY 4.0, abstracts ODC-By 1.0), and
+the PubMed abstracts in the language-model corpus. The pretrained models are BiomedBERT \citep{gu2021domain} and
+BioLinkBERT \citep{yasunaga2022linkbert}, the latter under Apache-2.0. The derived files needed to rerun every stage are
+released: folds, decontamination lists, tokenizer and corpus manifests.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+\end{document}

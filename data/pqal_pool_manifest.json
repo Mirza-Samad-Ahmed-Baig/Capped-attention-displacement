@@ -1,0 +1,14 @@
+{
+  "utc": "2026-09-24T20:58:35.946632+00:00",
+  "source": "https://huggingface.co/datasets/qiaojin/PubMedQA/resolve/9001f2853fb87cab8d220904e0de81ac6973b318/pqa_labeled/train-00000-of-00001.parquet",
+  "parquet_sha256": "3d56bd1abc11884579ecc3aab9dd3cdfce8b7cf54715daeca93b8022b7be231c",
+  "records": 500,
+  "pool_sha256": "79d2b2f99aa01d66a2ec78380461bce96e82d8cbae7ca1919fdf70d0aaf6f28d",
+  "label_counts": {
+    "yes": 276,
+    "no": 169,
+    "maybe": 55
+  },
+  "test_rows_processed": false,
+  "note": "Test rows removed by PMID filter before conversion; local question/context/label verified"
+}

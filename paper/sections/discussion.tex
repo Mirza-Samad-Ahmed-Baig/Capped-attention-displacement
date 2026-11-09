@@ -1,0 +1,104 @@
+% Discussion. The limitations are fixed by the design and the protocol's claim boundaries; the
+% interpretation of outcomes is written only after the unseal.
+\section{Discussion}\label{sec:discussion}
+
+\paragraph{What the results support}
+The preregistered outcome table maps these verdicts to one claim. H1 is Better in one regime (the LM), and H3 is not Better in either
+regime (Worse in the LM, calibration only in the encoder). The supported claim is therefore restricted:
+\emph{at a fixed mean, the tail of the attention displacement matters in the data-limited language model}. Capping
+the tail of top-4 deletion beat fixed-coefficient deletion with the same deletion draws, unbudgeted deletion
+from the same candidate keys, and the tuned Relaxed Attention. It also beat no attention regularization. Capping did
+not beat the strongest tuned control, and the protocol requires that this result be reported as a cost of the method. We make no claim that tail
+capping is the active ingredient of attention regularization in general. We also make no claim for PubMedQA fine-tuning,
+where the confirmatory contrasts were inconclusive and no attention family improved on the unregularized reference.
+
+\paragraph{The registered LM expectation failed}
+From the census separation, we had registered that CapDrop would \emph{not} beat fixed-$\alpha$ deletion in the LM.
+The reasoning was that in an overfitting regime the second-order term $\mathbb E d^2$ regularizes, and the cap minimizes it.
+The opposite happened, and by a wide margin. Two observations bear on why, though neither was a registered test. First, the regime overfitted
+only mildly: it failed its overfitting gate even after the fallback. Second, in this regime the heavy-tailed arms at
+$\ell=0.10$ \emph{hurt}. Fixed-$\alpha$ deletion and Relaxed Attention were worse than no attention regularization, and
+unbudgeted deletion was about neutral. Removing the tail turned a harmful perturbation into a helpful one. A
+convex-order argument tells us which arm has the least dispersed displacement, but not whether dispersion helps or harms.
+These results show that the sign is regime-dependent, and that a census statistic alone did not predict it.
+
+\paragraph{The cap is not uniformly beneficial}
+TV-budgeted relaxation, the cap applied to a uniform candidate, was clearly worse than Relaxed Attention in the LM.
+With $\tau=0.10$ below almost every row's distance to uniform, it displaces nearly every row by the same amount, so
+diffuse rows are perturbed as much as concentrated ones. The benefit we observe is specific to capping a heavy-tailed
+deletion candidate. Capping as such did not help. The targeting extension agrees with this. Applied to a candidate that may delete
+any key, the same cap was equivalent to CapDrop in the LM.
+
+\paragraph{Gradient path}
+CapDrop and fixed-$\alpha$ deletion differ in their gradients as well as in their forward perturbation. The stop-gradient ablation
+(E8) separates the two. Removing the gradient through $\alpha$ cost about 0.010 nats/token. The detached arm still beat fixed-$\alpha$
+deletion by 0.035, so most of the H1-L difference comes with the capped forward perturbation. The ablation is descriptive and
+is not part of the confirmatory family.
+
+\paragraph{DropKey and dose}
+DropKey and attention dropout, both selected at $\ell=0.20$, gave the lowest LM test loss. CapDrop was fixed by
+design at $\ell=0.10$, and in the LM no top-4 deletion arm can deliver 0.20, because even $p=1$ removes only 0.1997
+of the mass on average. H3-L therefore compares CapDrop at its prespecified dose with a competitor at twice the
+dose. The design cannot say whether the difference is one of form or of dose. Our data are consistent with dose: the two best arms were also the two highest-dose arms, and attention
+dropout, the least targeted family, beat every arm at $\ell=0.10$. A capped candidate
+that can reach larger displacements, such as budgeted DropKey at a higher $\tau$, is the natural next test. It was not part of
+this protocol.
+
+\paragraph{Fine-tuning on PubMedQA}
+On 450 training questions per fold, the between-fold variability of the paired Brier differences (SD 0.02--0.03) was
+larger than every attention effect. All calibrated attention arms lay within 0.027 Brier of the reference, and the
+second encoder, the second task and the fragile recipe showed no consistent advantage either. Any benefit of attention
+regularization in this regime is smaller than our design could detect (about one between-fold SD at ten units). The
+difference that did reach significance came from label smoothing, and it was calibration: a single temperature fitted on 50 development
+questions removed it. For practitioners in this regime, temperature scaling is cheaper than any regularizer we tested.
+
+\paragraph{How the fine-tuned models use evidence}
+Every stabilized model used the abstract, mainly its RESULTS section. Deleting RESULTS lowered accuracy to the majority rate, and question-only
+evaluation fell below it. A label-differing abstract changed about 60\% of the predictions. Neither the question-only
+model trained under the same protocol (49.3\%) nor the question-only evaluation of the fine-tuned models
+reached the majority rate. In this setting, PubMedQA accuracy reflects reading the abstract rather than question
+priors. To our knowledge, and in the literature we searched, these are the first fine-tuned question-only and
+mismatched-evidence baselines reported on PQA-L.
+
+\subsection{Limitations}
+\paragraph{Scope}
+All models have at most 110M parameters and were trained on English biomedical text with one 4\,GB laptop GPU, using
+non-deterministic bf16 kernels. The confirmatory statements hold at the prespecified operating points: top-4
+deletion, a mean displacement of 0.10 and the calibrated proposal rate. We make no state-of-the-art claim,
+because larger biomedical encoders report higher PubMedQA accuracy \citep{yasunaga2022linkbert,tinn2023finetuning}, and no clinical claim.
+
+\paragraph{Held-out data}
+The official PubMedQA test set is on its second use: it was scored once in an unrelated earlier pilot, with no
+selection. Inference about it is therefore conditional on that set. The language-model test stream and the SciFact
+evaluation set had not been evaluated before in this project. With ten units per contrast, the exact sign-flip test has a minimum two-sided $p$ of
+0.002. The detectable effect is about one to 1.3 between-unit standard deviations at 80\% power. ``Inconclusive'' is a
+possible and legitimate verdict.
+
+\paragraph{What the matched-mean test isolates}
+CapDrop and fixed-$\alpha$ deletion share the candidate, the deletion draws and the mean displacement, but they
+differ in more than the tail. Their mean shifts $B$ differ slightly (Table~\ref{tab:calib}). The rows on which the cap
+binds are the concentrated ones. Only CapDrop's gradient flows through $\alpha$; in the LM, the stop-gradient ablation (E8) separates this part. We state this bundle as the
+contrast, rather than claiming to isolate the tail alone. Calibration pools rows over layers, so per-layer doses
+differ between arms (Figure~\ref{fig:census}). The theory is local to one row with fixed values; the second-order
+reading is a heuristic, and the descriptive displacement-accounting model is not a mediation analysis.
+
+\paragraph{Deviations}
+The language-model regime did not meet its prespecified overfitting criterion, even after the single
+allowed fallback. The regime is multi-epoch and data-limited, but it overfits less than planned. The manipulation check was
+run after the encoder finals had started; it required no recalibration. The language-model runner initially ignored
+DropKey's depth schedule. The manipulation record revealed this before any test outcome was seen: the three affected
+tuning runs had about 1.7 times their calibrated displacement. They were excluded, unopened and reported, and rerun
+after the fix, and the unchanged selection rule was applied again. The TV-budgeted relaxation and budgeted-DropKey
+language models do not fit in the free GPU memory, so they use activation checkpointing, which gave bit-identical
+losses and gradients in a probe. The audit replays were implemented after the freeze and before the unseal. The protocol capped the campaign at 90
+GPU-hours or 12 days after the freeze. The calendar limit expired while the campaign was paused for laptop availability,
+and we extended it before any test outcome had been seen. The GPU-hour cap still applied, and the extension runs that
+finished after the calendar limit are identified in the supplement. The rule that each extension starts only if its full cost fits under the cap was applied per extension. E6 did not fit, and
+E8, declared after it, did. This was recorded with E8's code hashes before E8 ran. After the unseal, we corrected the
+language-model curve figure, which had plotted single tuning runs instead of the ten-seed arms (validation data
+only). We also generated the result tables mechanically from the analysis file, because the analysis script did not write them.
+Every deviation, with its timestamp and code hash, is listed in the supplement.
+
+\paragraph{Literature coverage}
+Novelty statements mean ``not found in the literature we searched''. Several search services rate-limited our
+queries, and non-English and paywalled venues are under-covered. The query log is in the supplement.

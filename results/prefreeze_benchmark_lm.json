@@ -1,0 +1,33 @@
+{
+ "note": "Pre-freeze outcome-blind LM throughput smoke (seed 999, 40 steps, 6L/384/6h ctx256 batch32 vocab16384, bf16 autocast, VRAM cap). Throughput includes short-run overhead.",
+ "runs": [
+  {
+   "arm": {
+    "kind": "dropout",
+    "p": 0.1
+   },
+   "parameters": 23328768,
+   "tokens_per_s": 32674.124952121405,
+   "peak_allocated_bytes": 2748278272
+  },
+  {
+   "arm": {
+    "kind": "hard_budget",
+    "p": 0.5,
+    "k": 4,
+    "tau": 0.1
+   },
+   "parameters": 23328768,
+   "tokens_per_s": 23552.61869776519,
+   "peak_allocated_bytes": 3079955968
+  },
+  {
+   "arm": {
+    "kind": "none"
+   },
+   "parameters": 23328768,
+   "tokens_per_s": 38079.58498472861,
+   "peak_allocated_bytes": 2443130368
+  }
+ ]
+}

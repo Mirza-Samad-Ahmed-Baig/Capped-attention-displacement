@@ -1,0 +1,316 @@
+{
+ "utc": "2026-11-08T20:16:08.857946+00:00",
+ "protocol_sha256": "937772c096c4a91f9d128ae45888e486d325210eb368ffece2edcba2fbe23930",
+ "runs": [
+  {
+   "run_id": "S2_HBsg@0.10_s1",
+   "study": "S2",
+   "seed": 2001,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s2",
+   "study": "S2",
+   "seed": 2002,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s3",
+   "study": "S2",
+   "seed": 2003,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s4",
+   "study": "S2",
+   "seed": 2004,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s5",
+   "study": "S2",
+   "seed": 2005,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s6",
+   "study": "S2",
+   "seed": 2006,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s7",
+   "study": "S2",
+   "seed": 2007,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s8",
+   "study": "S2",
+   "seed": 2008,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s9",
+   "study": "S2",
+   "seed": 2009,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  },
+  {
+   "run_id": "S2_HBsg@0.10_s10",
+   "study": "S2",
+   "seed": 2010,
+   "arm": {
+    "kind": "hard_budget_sg",
+    "p": 0.8,
+    "k": 4,
+    "tau": 0.16273273420058434
+   },
+   "recipe": {
+    "vocab": 16384,
+    "width": 384,
+    "layers": 6,
+    "heads": 6,
+    "context": 256,
+    "batch": 32,
+    "steps": 977,
+    "warmup_steps": 49,
+    "betas": [
+     0.9,
+     0.95
+    ],
+    "weight_decay": 0.1,
+    "min_lr_fraction": 0.1,
+    "unique_tokens": 500000,
+    "eval_every": 98,
+    "dropout": 0.1,
+    "lr": 0.0005
+   }
+  }
+ ]
+}

@@ -1,0 +1,918 @@
+% references.bib -- Neural Networks (Elsevier) manuscript, style elsarticle-harv.
+% Every entry was fetched on 2026-09-27 from the source named in references_verification.md
+% (DOI content negotiation, arXiv API, ACL Anthology .bib, NeurIPS/ICLR/PMLR/CVF/JMLR pages,
+% iclr.cc schedule pages). Nothing was written from memory. Keep this file ASCII: accents are
+% LaTeX-escaped, and acronyms/proper nouns are braced because elsarticle-harv sentence-cases titles.
+
+% ---------------------------------------------------------------------------------------------
+% Transformers, dropout and attention regularisation
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{vaswani2017attention,
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  title     = {Attention is All you Need},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {30},
+  publisher = {Curran Associates, Inc.},
+  year      = {2017},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}
+}
+
+@article{srivastava2014dropout,
+  author    = {Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan},
+  title     = {Dropout: A Simple Way to Prevent Neural Networks from Overfitting},
+  journal   = {Journal of Machine Learning Research},
+  volume    = {15},
+  number    = {56},
+  pages     = {1929--1958},
+  year      = {2014},
+  url       = {https://jmlr.org/papers/v15/srivastava14a.html}
+}
+
+@misc{hinton2015distilling,
+  author        = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  title         = {Distilling the Knowledge in a Neural Network},
+  howpublished  = {arXiv preprint},
+  year          = {2015},
+  eprint        = {1503.02531},
+  archivePrefix = {arXiv},
+  primaryClass  = {stat.ML}
+}
+
+@misc{lin2019dropattention,
+  author        = {Lin, Zehui and Liu, Pengfei and Huang, Luyao and Chen, Junkun and Qiu, Xipeng and Huang, Xuanjing},
+  title         = {{DropAttention}: A Regularization Method for Fully-Connected Self-Attention Networks},
+  howpublished  = {arXiv preprint},
+  year          = {2019},
+  eprint        = {1907.11065},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{li2023dropkey,
+  author    = {Li, Bonan and Hu, Yinhan and Nie, Xuecheng and Han, Congying and Jiang, Xiangjian and Guo, Tiande and Liu, Luoqi},
+  title     = {{DropKey} for Vision Transformer},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {22700--22709},
+  publisher = {IEEE},
+  year      = {2023},
+  doi       = {10.1109/CVPR52729.2023.02174}
+}
+
+@inproceedings{zhou2020drophead,
+  author    = {Zhou, Wangchunshu and Ge, Tao and Wei, Furu and Zhou, Ming and Xu, Ke},
+  title     = {Scheduled {D}rop{H}ead: A Regularization Method for Transformer Models},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2020},
+  pages     = {1971--1980},
+  publisher = {Association for Computational Linguistics},
+  address   = {Online},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.findings-emnlp.178}
+}
+
+@inproceedings{lohrenz2021relaxed,
+  author    = {Lohrenz, Timo and Schwarz, Patrick and Li, Zhengyang and Fingscheidt, Tim},
+  title     = {Relaxed Attention: A Simple Method to Boost Performance of End-to-End Automatic Speech Recognition},
+  booktitle = {2021 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU)},
+  pages     = {177--184},
+  publisher = {IEEE},
+  year      = {2021},
+  doi       = {10.1109/ASRU51503.2021.9688298}
+}
+
+@inproceedings{lohrenz2023relaxed,
+  author    = {Lohrenz, Timo and M{\"o}ller, Bj{\"o}rn and Li, Zhengyang and Fingscheidt, Tim},
+  title     = {Relaxed Attention for Transformer Models},
+  booktitle = {2023 International Joint Conference on Neural Networks (IJCNN)},
+  pages     = {1--10},
+  publisher = {IEEE},
+  year      = {2023},
+  doi       = {10.1109/IJCNN54540.2023.10191643}
+}
+
+@inproceedings{liang2021rdrop,
+  author    = {Liang, Xiaobo and Wu, Lijun and Li, Juntao and Wang, Yue and Meng, Qi and Qin, Tao and Chen, Wei and Zhang, Min and Liu, Tie-Yan},
+  title     = {{R-Drop}: Regularized Dropout for Neural Networks},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {34},
+  pages     = {10890--10905},
+  publisher = {Curran Associates, Inc.},
+  year      = {2021},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2021/hash/5a66b9200f29ac3fa0ae244cc2a51b39-Abstract.html}
+}
+
+@inproceedings{fan2020reducing,
+  author    = {Fan, Angela and Grave, Edouard and Joulin, Armand},
+  title     = {Reducing Transformer Depth on Demand with Structured Dropout},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2020},
+  url       = {https://openreview.net/forum?id=SylO2yStDr}
+}
+
+@inproceedings{wu2021unidrop,
+  author    = {Wu, Zhen and Wu, Lijun and Meng, Qi and Xia, Yingce and Xie, Shufang and Qin, Tao and Dai, Xinyu and Liu, Tie-Yan},
+  title     = {{U}ni{D}rop: A Simple yet Effective Technique to Improve Transformer without Extra Cost},
+  booktitle = {Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  pages     = {3865--3878},
+  publisher = {Association for Computational Linguistics},
+  address   = {Online},
+  year      = {2021},
+  doi       = {10.18653/v1/2021.naacl-main.302}
+}
+
+@misc{baig2025attentiondrop,
+  author        = {Baig, Mirza Samad Ahmed and Gillani, Syeda Anshrah and Khan, Abdul Akbar and Shah, Shahid Munir and Khan, Muhammad Omer},
+  title         = {{AttentionDrop}: A Novel Regularization Method for Transformer Models},
+  howpublished  = {arXiv preprint},
+  year          = {2025},
+  eprint        = {2504.12088},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}
+
+@inproceedings{sander2022sinkformers,
+  author    = {Sander, Michael E. and Ablin, Pierre and Blondel, Mathieu and Peyr{\'e}, Gabriel},
+  title     = {{Sinkformers}: Transformers with Doubly Stochastic Attention},
+  booktitle = {Proceedings of The 25th International Conference on Artificial Intelligence and Statistics},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {151},
+  pages     = {3515--3530},
+  publisher = {PMLR},
+  year      = {2022},
+  url       = {https://proceedings.mlr.press/v151/sander22a.html}
+}
+
+@inproceedings{maekaku2022attention,
+  author    = {Maekaku, Takashi and Fujita, Yuya and Peng, Yifan and Watanabe, Shinji},
+  title     = {Attention Weight Smoothing Using Prior Distributions for Transformer-Based End-to-End {ASR}},
+  booktitle = {Proc. Interspeech 2022},
+  pages     = {1071--1075},
+  publisher = {ISCA},
+  year      = {2022},
+  doi       = {10.21437/Interspeech.2022-11441}
+}
+
+@inproceedings{lin2025twilight,
+  author    = {Lin, Chaofan and Tang, Jiaming and Yang, Shuo and Wang, Hanshuo and Tang, Tian and Tian, Boyu and Stoica, Ion and Han, Song and Gao, Mingyu},
+  title     = {Twilight: Adaptive Attention Sparsity with Hierarchical Top-$p$ Pruning},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {38},
+  publisher = {Curran Associates, Inc.},
+  year      = {2025},
+  doi       = {10.52202/085713-3986}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Fine-tuning stability and low-resource adaptation
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{lee2020mixout,
+  author    = {Lee, Cheolhyoung and Cho, Kyunghyun and Kang, Wanmo},
+  title     = {Mixout: Effective Regularization to Finetune Large-scale Pretrained Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2020},
+  url       = {https://openreview.net/forum?id=HkgaETNtDB}
+}
+
+@inproceedings{mosbach2021stability,
+  author    = {Mosbach, Marius and Andriushchenko, Maksym and Klakow, Dietrich},
+  title     = {On the Stability of Fine-tuning {BERT}: Misconceptions, Explanations, and Strong Baselines},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021},
+  url       = {https://openreview.net/forum?id=nzpLWnVAyah}
+}
+
+@inproceedings{zhang2021revisiting,
+  author    = {Zhang, Tianyi and Wu, Felix and Katiyar, Arzoo and Weinberger, Kilian Q. and Artzi, Yoav},
+  title     = {Revisiting Few-sample {BERT} Fine-tuning},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021},
+  url       = {https://openreview.net/forum?id=cO1IH43yUF}
+}
+
+@misc{dodge2020finetuning,
+  author        = {Dodge, Jesse and Ilharco, Gabriel and Schwartz, Roy and Farhadi, Ali and Hajishirzi, Hannaneh and Smith, Noah},
+  title         = {Fine-Tuning Pretrained Language Models: Weight Initializations, Data Orders, and Early Stopping},
+  howpublished  = {arXiv preprint},
+  year          = {2020},
+  eprint        = {2002.06305},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{loshchilov2019decoupled,
+  author    = {Loshchilov, Ilya and Hutter, Frank},
+  title     = {Decoupled Weight Decay Regularization},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2019},
+  url       = {https://openreview.net/forum?id=Bkg6RiCqY7}
+}
+
+@inproceedings{hu2022lora,
+  author    = {Hu, Edward J. and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and Chen, Weizhu},
+  title     = {{LoRA}: Low-Rank Adaptation of Large Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2022},
+  url       = {https://openreview.net/forum?id=nZeVKeeFYf9}
+}
+
+@inproceedings{muller2019label,
+  author    = {M{\"u}ller, Rafael and Kornblith, Simon and Hinton, Geoffrey E.},
+  title     = {When does label smoothing help?},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {32},
+  publisher = {Curran Associates, Inc.},
+  year      = {2019},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2019/hash/f1748d6b0fd9d439f71450117eba2725-Abstract.html}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Biomedical NLP and datasets
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{jin2019pubmedqa,
+  author    = {Jin, Qiao and Dhingra, Bhuwan and Liu, Zhengping and Cohen, William and Lu, Xinghua},
+  title     = {{P}ub{M}ed{QA}: A Dataset for Biomedical Research Question Answering},
+  booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},
+  pages     = {2567--2577},
+  publisher = {Association for Computational Linguistics},
+  address   = {Hong Kong, China},
+  year      = {2019},
+  doi       = {10.18653/v1/D19-1259}
+}
+
+@article{gu2021domain,
+  author    = {Gu, Yu and Tinn, Robert and Cheng, Hao and Lucas, Michael and Usuyama, Naoto and Liu, Xiaodong and Naumann, Tristan and Gao, Jianfeng and Poon, Hoifung},
+  title     = {Domain-Specific Language Model Pretraining for Biomedical Natural Language Processing},
+  journal   = {ACM Transactions on Computing for Healthcare},
+  volume    = {3},
+  number    = {1},
+  pages     = {1--23},
+  year      = {2021},
+  doi       = {10.1145/3458754}
+}
+
+@inproceedings{yasunaga2022linkbert,
+  author    = {Yasunaga, Michihiro and Leskovec, Jure and Liang, Percy},
+  title     = {{L}ink{BERT}: Pretraining Language Models with Document Links},
+  booktitle = {Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {8003--8016},
+  publisher = {Association for Computational Linguistics},
+  address   = {Dublin, Ireland},
+  year      = {2022},
+  doi       = {10.18653/v1/2022.acl-long.551}
+}
+
+@article{tinn2023finetuning,
+  author    = {Tinn, Robert and Cheng, Hao and Gu, Yu and Usuyama, Naoto and Liu, Xiaodong and Naumann, Tristan and Gao, Jianfeng and Poon, Hoifung},
+  title     = {Fine-tuning large neural language models for biomedical natural language processing},
+  journal   = {Patterns},
+  volume    = {4},
+  number    = {4},
+  pages     = {100729},
+  year      = {2023},
+  doi       = {10.1016/j.patter.2023.100729}
+}
+
+@inproceedings{wadden2020scifact,
+  author    = {Wadden, David and Lin, Shanchuan and Lo, Kyle and Wang, Lucy Lu and van Zuylen, Madeleine and Cohan, Arman and Hajishirzi, Hannaneh},
+  title     = {Fact or Fiction: Verifying Scientific Claims},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {7534--7550},
+  publisher = {Association for Computational Linguistics},
+  address   = {Online},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-main.609}
+}
+
+@article{rohanian2023compact,
+  author    = {Rohanian, Omid and Nouriborji, Mohammadmahdi and Kouchaki, Samaneh and Clifton, David A.},
+  title     = {On the effectiveness of compact biomedical transformers},
+  journal   = {Bioinformatics},
+  volume    = {39},
+  number    = {3},
+  pages     = {btad103},
+  year      = {2023},
+  doi       = {10.1093/bioinformatics/btad103}
+}
+
+@inproceedings{xiong2024mirage,
+  author    = {Xiong, Guangzhi and Jin, Qiao and Lu, Zhiyong and Zhang, Aidong},
+  title     = {Benchmarking Retrieval-Augmented Generation for Medicine},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},
+  pages     = {6233--6251},
+  publisher = {Association for Computational Linguistics},
+  address   = {Bangkok, Thailand},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.findings-acl.372}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Attention analysis, attention sinks and massive activations
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{clark2019bert,
+  author    = {Clark, Kevin and Khandelwal, Urvashi and Levy, Omer and Manning, Christopher D.},
+  title     = {What Does {BERT} Look at? {An} Analysis of {BERT}'s Attention},
+  booktitle = {Proceedings of the 2019 ACL Workshop BlackboxNLP: Analyzing and Interpreting Neural Networks for NLP},
+  pages     = {276--286},
+  publisher = {Association for Computational Linguistics},
+  address   = {Florence, Italy},
+  year      = {2019},
+  doi       = {10.18653/v1/W19-4828}
+}
+
+@inproceedings{kobayashi2020attention,
+  author    = {Kobayashi, Goro and Kuribayashi, Tatsuki and Yokoi, Sho and Inui, Kentaro},
+  title     = {Attention is Not Only a Weight: Analyzing Transformers with Vector Norms},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {7057--7075},
+  publisher = {Association for Computational Linguistics},
+  address   = {Online},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-main.574}
+}
+
+@inproceedings{jain2019attention,
+  author    = {Jain, Sarthak and Wallace, Byron C.},
+  title     = {{A}ttention is not {E}xplanation},
+  booktitle = {Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)},
+  pages     = {3543--3556},
+  publisher = {Association for Computational Linguistics},
+  address   = {Minneapolis, Minnesota},
+  year      = {2019},
+  doi       = {10.18653/v1/N19-1357}
+}
+
+@inproceedings{xiao2024sinks,
+  author    = {Xiao, Guangxuan and Tian, Yuandong and Chen, Beidi and Han, Song and Lewis, Mike},
+  title     = {Efficient Streaming Language Models with Attention Sinks},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  volume    = {2024},
+  pages     = {21875--21895},
+  year      = {2024},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2024/hash/5e5fd18f863cbe6d8ae392a93fd271c9-Abstract-Conference.html}
+}
+
+@inproceedings{darcet2024registers,
+  author    = {Darcet, Timoth{\'e}e and Oquab, Maxime and Mairal, Julien and Bojanowski, Piotr},
+  title     = {Vision Transformers Need Registers},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  volume    = {2024},
+  pages     = {2632--2652},
+  year      = {2024},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2024/hash/0b408293619f725fd30162af057e531a-Abstract-Conference.html}
+}
+
+@inproceedings{sun2024massive,
+  author    = {Sun, Mingjie and Chen, Xinlei and Kolter, J. Zico and Liu, Zhuang},
+  title     = {Massive Activations in Large Language Models},
+  booktitle = {First Conference on Language Modeling (COLM)},
+  year      = {2024},
+  url       = {https://openreview.net/forum?id=F7aAhfitX6}
+}
+
+@inproceedings{gu2025sinks,
+  author    = {Gu, Xiangming and Pang, Tianyu and Du, Chao and Liu, Qian and Zhang, Fengzhuo and Du, Cunxiao and Wang, Ye and Lin, Min},
+  title     = {When Attention Sink Emerges in Language Models: An Empirical View},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  volume    = {2025},
+  pages     = {97114--97144},
+  year      = {2025},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2025/hash/f1b04face60081b689ba740d39ea8f37-Abstract-Conference.html}
+}
+
+@inproceedings{kim2021lipschitz,
+  author    = {Kim, Hyunjik and Papamakarios, George and Mnih, Andriy},
+  title     = {The {Lipschitz} Constant of Self-Attention},
+  booktitle = {Proceedings of the 38th International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {139},
+  pages     = {5562--5571},
+  publisher = {PMLR},
+  year      = {2021},
+  url       = {https://proceedings.mlr.press/v139/kim21i.html}
+}
+
+@inproceedings{dao2022flashattention,
+  author    = {Dao, Tri and Fu, Dan and Ermon, Stefano and Rudra, Atri and R{\'e}, Christopher},
+  title     = {{FlashAttention}: Fast and Memory-Efficient Exact Attention with {IO}-Awareness},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {35},
+  pages     = {16344--16359},
+  publisher = {Curran Associates, Inc.},
+  year      = {2022},
+  doi       = {10.52202/068431-1189}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Theory: noise as regularisation, trust regions, privacy, data scaling
+% ---------------------------------------------------------------------------------------------
+
+@article{bishop1995training,
+  author    = {Bishop, Chris M.},
+  title     = {Training with Noise is Equivalent to {Tikhonov} Regularization},
+  journal   = {Neural Computation},
+  volume    = {7},
+  number    = {1},
+  pages     = {108--116},
+  year      = {1995},
+  doi       = {10.1162/neco.1995.7.1.108}
+}
+
+@inproceedings{wager2013dropout,
+  author    = {Wager, Stefan and Wang, Sida and Liang, Percy S.},
+  title     = {Dropout Training as Adaptive Regularization},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {26},
+  publisher = {Curran Associates, Inc.},
+  year      = {2013},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2013/hash/38db3aed920cf82ab059bfccbd02be6a-Abstract.html}
+}
+
+@inproceedings{abadi2016deep,
+  author    = {Abadi, Martin and Chu, Andy and Goodfellow, Ian and McMahan, H. Brendan and Mironov, Ilya and Talwar, Kunal and Zhang, Li},
+  title     = {Deep Learning with Differential Privacy},
+  booktitle = {Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security (CCS '16)},
+  pages     = {308--318},
+  publisher = {ACM},
+  year      = {2016},
+  doi       = {10.1145/2976749.2978318}
+}
+
+@misc{schulman2017ppo,
+  author        = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg},
+  title         = {Proximal Policy Optimization Algorithms},
+  howpublished  = {arXiv preprint},
+  year          = {2017},
+  eprint        = {1707.06347},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@inproceedings{kakade2002approximately,
+  author    = {Kakade, Sham M. and Langford, John},
+  title     = {Approximately Optimal Approximate Reinforcement Learning},
+  booktitle = {Proceedings of the Nineteenth International Conference on Machine Learning (ICML 2002)},
+  address   = {Sydney, Australia},
+  pages     = {267--274},
+  year      = {2002},
+  url       = {https://homes.cs.washington.edu/~sham/papers/rl/aoarl.pdf}
+}
+
+@inproceedings{muennighoff2023scaling,
+  author    = {Muennighoff, Niklas and Rush, Alexander and Barak, Boaz and Le Scao, Teven and Tazi, Nouamane and Piktus, Aleksandra and Pyysalo, Sampo and Wolf, Thomas and Raffel, Colin},
+  title     = {Scaling Data-Constrained Language Models},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {36},
+  pages     = {50358--50376},
+  publisher = {Curran Associates, Inc.},
+  year      = {2023},
+  doi       = {10.52202/075280-2191}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Dataset artefacts and shortcut learning
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{gururangan2018annotation,
+  author    = {Gururangan, Suchin and Swayamdipta, Swabha and Levy, Omer and Schwartz, Roy and Bowman, Samuel R. and Smith, Noah A.},
+  title     = {Annotation Artifacts in Natural Language Inference Data},
+  booktitle = {Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)},
+  pages     = {107--112},
+  publisher = {Association for Computational Linguistics},
+  address   = {New Orleans, Louisiana},
+  year      = {2018},
+  doi       = {10.18653/v1/N18-2017}
+}
+
+@inproceedings{poliak2018hypothesis,
+  author    = {Poliak, Adam and Naradowsky, Jason and Haldar, Aparajita and Rudinger, Rachel and Van Durme, Benjamin},
+  title     = {Hypothesis Only Baselines in Natural Language Inference},
+  booktitle = {Proceedings of the Seventh Joint Conference on Lexical and Computational Semantics},
+  pages     = {180--191},
+  publisher = {Association for Computational Linguistics},
+  address   = {New Orleans, Louisiana},
+  year      = {2018},
+  doi       = {10.18653/v1/S18-2023}
+}
+
+@inproceedings{kaushik2018reading,
+  author    = {Kaushik, Divyansh and Lipton, Zachary C.},
+  title     = {How Much Reading Does Reading Comprehension Require? {A} Critical Investigation of Popular Benchmarks},
+  booktitle = {Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {5010--5015},
+  publisher = {Association for Computational Linguistics},
+  address   = {Brussels, Belgium},
+  year      = {2018},
+  doi       = {10.18653/v1/D18-1546}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Statistics
+% ---------------------------------------------------------------------------------------------
+
+@article{nadeau2003inference,
+  author    = {Nadeau, Claude and Bengio, Yoshua},
+  title     = {Inference for the Generalization Error},
+  journal   = {Machine Learning},
+  volume    = {52},
+  number    = {3},
+  pages     = {239--281},
+  year      = {2003},
+  doi       = {10.1023/A:1024068626366}
+}
+
+% =============================================================================================
+% Second batch, appended 2026-09-27. Every entry below was fetched on that date from the source
+% named for its key in references_verification.md (section "Second batch"). Nothing was written
+% from memory. Same conventions as above: ASCII only, doi preferred over url.
+% =============================================================================================
+
+% ---------------------------------------------------------------------------------------------
+% Attention regularisation, dropout variants and attention robustness
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{luo2021dropout,
+  author    = {Luo, Jian and Wang, Jianzong and Cheng, Ning and Xiao, Jing},
+  title     = {Dropout Regularization for Self-Supervised Learning of {Transformer} Encoder Speech Representation},
+  booktitle = {Proc. Interspeech 2021},
+  pages     = {1169--1173},
+  publisher = {ISCA},
+  year      = {2021},
+  doi       = {10.21437/Interspeech.2021-1066}
+}
+
+@inproceedings{wang2024loradropout,
+  author    = {Wang, Sheng and Chen, Liheng and Jiang, Jiyue and Xue, Boyang and Kong, Lingpeng and Wu, Chuan},
+  title     = {{LoRA} Meets Dropout under a Unified Framework},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},
+  pages     = {1995--2008},
+  publisher = {Association for Computational Linguistics},
+  address   = {Bangkok, Thailand},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.findings-acl.119}
+}
+
+@misc{wu2021notall,
+  author        = {Wu, Hongqiu and Zhao, Hai and Zhang, Min},
+  title         = {Not All Attention Is All You Need},
+  howpublished  = {arXiv preprint},
+  year          = {2021},
+  eprint        = {2104.04692},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@inproceedings{yang2022addrop,
+  author    = {Yang, Tao and Deng, Jinghao and Quan, Xiaojun and Wang, Qifan and Nie, Shaoliang},
+  title     = {{AD-DROP}: Attribution-Driven Dropout for Robust Language Model Fine-Tuning},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {35},
+  pages     = {12310--12324},
+  publisher = {Curran Associates, Inc.},
+  year      = {2022},
+  doi       = {10.52202/068431-0894}
+}
+
+@inproceedings{fan2020bam,
+  author    = {Fan, Xinjie and Zhang, Shujian and Chen, Bo and Zhou, Mingyuan},
+  title     = {{Bayesian} Attention Modules},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {33},
+  pages     = {16362--16376},
+  publisher = {Curran Associates, Inc.},
+  year      = {2020},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2020/hash/bcff3f632fd16ff099a49c2f0932b47a-Abstract.html}
+}
+
+@inproceedings{ghiasi2018dropblock,
+  author    = {Ghiasi, Golnaz and Lin, Tsung-Yi and Le, Quoc V.},
+  title     = {{DropBlock}: A regularization method for convolutional networks},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {31},
+  publisher = {Curran Associates, Inc.},
+  year      = {2018},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2018/hash/7edcfb2d8f6a659ef4cd1e6c9b6d7079-Abstract.html}
+}
+
+@inproceedings{wu2023tlm,
+  author    = {Wu, Yangjun and Fang, Kebin and Zhang, Dongxiang and Wang, Han and Zhang, Hao and Chen, Gang},
+  title     = {{TLM}: Token-Level Masking for Transformers},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {14099--14111},
+  publisher = {Association for Computational Linguistics},
+  address   = {Singapore},
+  year      = {2023},
+  doi       = {10.18653/v1/2023.emnlp-main.871}
+}
+
+@article{amirahmadi2025anaa,
+  author    = {Amirahmadi, Ali and Etminani, Farzaneh and Ohlsson, Mattias},
+  title     = {Adaptive noise-augmented attention for enhancing {Transformer} fine-tuning on longitudinal medical data},
+  journal   = {Frontiers in Artificial Intelligence},
+  volume    = {8},
+  pages     = {1663484},
+  year      = {2025},
+  doi       = {10.3389/frai.2025.1663484}
+}
+
+@article{kitada2021attention,
+  author    = {Kitada, Shunsuke and Iyatomi, Hitoshi},
+  title     = {Attention Meets Perturbations: Robust and Interpretable Attention With Adversarial Training},
+  journal   = {IEEE Access},
+  volume    = {9},
+  pages     = {92974--92985},
+  year      = {2021},
+  doi       = {10.1109/ACCESS.2021.3093456}
+}
+
+@inproceedings{hu2023seat,
+  author    = {Hu, Lijie and Liu, Yixin and Liu, Ninghao and Huai, Mengdi and Sun, Lichao and Wang, Di},
+  title     = {{SEAT}: Stable and Explainable Attention},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {37},
+  number    = {11},
+  pages     = {12907--12915},
+  publisher = {Association for the Advancement of Artificial Intelligence},
+  year      = {2023},
+  doi       = {10.1609/aaai.v37i11.26517}
+}
+
+@article{utkin2022attention,
+  author    = {Utkin, Lev V. and Konstantinov, Andrei V.},
+  title     = {Attention-based random forest and contamination model},
+  journal   = {Neural Networks},
+  volume    = {154},
+  pages     = {346--359},
+  year      = {2022},
+  doi       = {10.1016/j.neunet.2022.07.029}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Sparse attention, KV-cache eviction and attention sensitivity
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{tzachristas2025topk,
+  author    = {Tzachristas, Georgios and Deng, Lei and Tzachristas, Ioannis and Zhang, Gong and Chen, Renhai},
+  title     = {A Mathematical Theory of Top-$k$ Sparse Attention via Total Variation Distance},
+  booktitle = {2026 IEEE International Symposium on Information Theory (ISIT)},
+  pages     = {1--6},
+  publisher = {IEEE},
+  year      = {2026},
+  doi       = {10.1109/ISIT62367.2026.11653946}
+}
+
+@misc{shi2026trustmass,
+  author        = {Shi, Jack and Gu, Jerry},
+  title         = {Trust the Mass: Forced Weights in {KV}-Cache Eviction},
+  howpublished  = {arXiv preprint},
+  year          = {2026},
+  eprint        = {2608.25230},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+@misc{emadi2026exact,
+  author        = {Emadi, Seyed Morteza},
+  title         = {Exact Attention Sensitivity and the Geometry of {Transformer} Stability},
+  howpublished  = {arXiv preprint},
+  year          = {2026},
+  eprint        = {2602.18849},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Optimisation, clipping, exploration noise, privacy, learning theory
+% ---------------------------------------------------------------------------------------------
+
+@inproceedings{koloskova2023revisiting,
+  author    = {Koloskova, Anastasia and Hendrikx, Hadrien and Stich, Sebastian U.},
+  title     = {Revisiting Gradient Clipping: Stochastic bias and tight convergence guarantees},
+  booktitle = {Proceedings of the 40th International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {202},
+  pages     = {17343--17363},
+  publisher = {PMLR},
+  year      = {2023},
+  url       = {https://proceedings.mlr.press/v202/koloskova23a.html}
+}
+
+@inproceedings{schulman2015trpo,
+  author    = {Schulman, John and Levine, Sergey and Moritz, Philipp and Jordan, Michael and Abbeel, Pieter},
+  title     = {Trust Region Policy Optimization},
+  booktitle = {Proceedings of the 32nd International Conference on Machine Learning},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {37},
+  pages     = {1889--1897},
+  publisher = {PMLR},
+  address   = {Lille, France},
+  year      = {2015},
+  url       = {https://proceedings.mlr.press/v37/schulman15.html}
+}
+
+@inproceedings{plappert2018parameter,
+  author    = {Plappert, Matthias and Houthooft, Rein and Dhariwal, Prafulla and Sidor, Szymon and Chen, Richard Y. and Chen, Xi and Asfour, Tamim and Abbeel, Pieter and Andrychowicz, Marcin},
+  title     = {Parameter Space Noise for Exploration},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2018},
+  url       = {https://openreview.net/forum?id=ByBAl2eAZ}
+}
+
+@inproceedings{andrew2021adaptive,
+  author    = {Andrew, Galen and Thakkar, Om and McMahan, H. Brendan and Ramaswamy, Swaroop},
+  title     = {Differentially Private Learning with Adaptive Clipping},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {34},
+  pages     = {17455--17466},
+  publisher = {Curran Associates, Inc.},
+  year      = {2021},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2021/hash/91cff01af640a24e7f9f7a5ab407889f-Abstract.html}
+}
+
+@inproceedings{wang2022eliminating,
+  author    = {Wang, Xingyu and Oh, Sewoong and Rhee, Chang-Han},
+  title     = {Eliminating Sharp Minima from {SGD} with Truncated Heavy-tailed Noise},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2022},
+  url       = {https://openreview.net/forum?id=B3Nde6lvab}
+}
+
+@article{bartlett2005local,
+  author    = {Bartlett, Peter L. and Bousquet, Olivier and Mendelson, Shahar},
+  title     = {Local {Rademacher} complexities},
+  journal   = {The Annals of Statistics},
+  volume    = {33},
+  number    = {4},
+  pages     = {1497--1537},
+  year      = {2005},
+  doi       = {10.1214/009053605000000282}
+}
+
+@article{vapnik2009new,
+  author    = {Vapnik, Vladimir and Vashist, Akshay},
+  title     = {A new learning paradigm: Learning using privileged information},
+  journal   = {Neural Networks},
+  volume    = {22},
+  number    = {5-6},
+  pages     = {544--557},
+  year      = {2009},
+  doi       = {10.1016/j.neunet.2009.06.042}
+}
+
+@inproceedings{lopezpaz2016unifying,
+  author    = {Lopez-Paz, David and Bottou, L{\'e}on and Sch{\"o}lkopf, Bernhard and Vapnik, Vladimir},
+  title     = {Unifying distillation and privileged information},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2016},
+  url       = {https://arxiv.org/abs/1511.03643}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Actuarial mathematics: excess losses, stop-loss order, optimal reinsurance
+% ---------------------------------------------------------------------------------------------
+
+@article{ohlin1969class,
+  author    = {Ohlin, Jan},
+  title     = {On a class of measures of dispersion with application to optimal reinsurance},
+  journal   = {ASTIN Bulletin},
+  volume    = {5},
+  number    = {2},
+  pages     = {249--266},
+  year      = {1969},
+  doi       = {10.1017/S0515036100008102}
+}
+
+@book{kaas2008modern,
+  author    = {Kaas, Rob and Goovaerts, Marc and Dhaene, Jan and Denuit, Michel},
+  title     = {Modern Actuarial Risk Theory: Using {R}},
+  edition   = {2nd},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  year      = {2008},
+  isbn      = {978-3-540-70992-3},
+  doi       = {10.1007/978-3-540-70998-5}
+}
+
+@article{halliwell2012excess,
+  author    = {Halliwell, Leigh J.},
+  title     = {The Mathematics of Excess Losses},
+  journal   = {Variance},
+  volume    = {6},
+  number    = {1},
+  pages     = {32--47},
+  year      = {2012},
+  doi       = {10.66573/001c.77490}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Biomedical NLP, retrieval-augmented QA and LLM evaluation
+% ---------------------------------------------------------------------------------------------
+
+@article{luo2022biogpt,
+  author    = {Luo, Renqian and Sun, Liai and Xia, Yingce and Qin, Tao and Zhang, Sheng and Poon, Hoifung and Liu, Tie-Yan},
+  title     = {{BioGPT}: generative pre-trained transformer for biomedical text generation and mining},
+  journal   = {Briefings in Bioinformatics},
+  volume    = {23},
+  number    = {6},
+  pages     = {bbac409},
+  year      = {2022},
+  doi       = {10.1093/bib/bbac409}
+}
+
+@inproceedings{fries2022bigbio,
+  author    = {Fries, Jason and Weber, Leon and Seelam, Natasha and Altay, Gabriel and Datta, Debajyoti and Garda, Samuele and Kang, Sunny and Su, Rosaline and Kusa, Wojciech and Cahyawijaya, Samuel and Barth, Fabio and Ott, Simon and Samwald, Matthias and Bach, Stephen and Biderman, Stella and S{\"a}nger, Mario and Wang, Bo and Callahan, Alison and Le{\'o}n Peri{\~n}{\'a}n, Daniel and Gigant, Th{\'e}o and Haller, Patrick and Chim, Jenny and Posada, Jose and Giorgi, John and Sivaraman, Karthik Rangasai and P{\`a}mies, Marc and Nezhurina, Marianna and Martin, Robert and Cullan, Michael and Freidank, Moritz and Dahlberg, Nathan and Mishra, Shubhanshu and Bose, Shamik and Broad, Nicholas and Labrak, Yanis and Deshmukh, Shlok and Kiblawi, Sid and Singh, Ayush and Vu, Minh Chien and Neeraj, Trishala and Golde, Jonas and Villanova del Moral, Albert and Beilharz, Benjamin},
+  title     = {{BigBio}: A Framework for Data-Centric Biomedical Natural Language Processing},
+  booktitle = {Advances in Neural Information Processing Systems (Datasets and Benchmarks Track)},
+  volume    = {35},
+  pages     = {25792--25806},
+  publisher = {Curran Associates, Inc.},
+  year      = {2022},
+  doi       = {10.52202/068431-1870}
+}
+
+@inproceedings{wen2024characterizing,
+  author    = {Wen, Bingbing and Howe, Bill and Wang, Lucy Lu},
+  title     = {Characterizing {LLM} Abstention Behavior in Science {QA} with Context Perturbations},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2024},
+  pages     = {3437--3450},
+  publisher = {Association for Computational Linguistics},
+  address   = {Miami, Florida, USA},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.findings-emnlp.197}
+}
+
+@inproceedings{zhang2024raft,
+  author    = {Zhang, Tianjun and Patil, Shishir G. and Jain, Naman and Shen, Sheng and Zaharia, Matei and Stoica, Ion and Gonzalez, Joseph E.},
+  title     = {{RAFT}: Adapting Language Model to Domain Specific {RAG}},
+  booktitle = {First Conference on Language Modeling (COLM)},
+  year      = {2024},
+  url       = {https://openreview.net/forum?id=rzQGHXNReU}
+}
+
+@misc{lala2023paperqa,
+  author        = {L{\'a}la, Jakub and O'Donoghue, Odhran and Shtedritski, Aleksandar and Cox, Sam and Rodriques, Samuel G. and White, Andrew D.},
+  title         = {{PaperQA}: Retrieval-Augmented Generative Agent for Scientific Research},
+  howpublished  = {arXiv preprint},
+  year          = {2023},
+  eprint        = {2312.07559},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@misc{xiao2025kailin,
+  author        = {Xiao, Meng and Cai, Xunxin and Long, Qingqing and Wang, Chengrui and Zhou, Yuanchun and Zhu, Hengshu},
+  title         = {Knowledge-Driven Agentic Scientific Corpus Distillation Framework for Biomedical Large Language Models Training},
+  howpublished  = {arXiv preprint},
+  year          = {2025},
+  eprint        = {2504.19565},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@article{huang2025selfreflective,
+  author    = {Huang, Tao and Lewis, Ashley and Zhang, Hui and Walker, Steven and Gao, Ling},
+  title     = {Self-Reflective {RAG} for Biomedical Question Answering with Retrieve-Critique-Revise Loops},
+  journal   = {Journal of Information Technology and Informatics Engineering},
+  volume    = {1},
+  number    = {2},
+  pages     = {23--34},
+  year      = {2025},
+  url       = {https://journal.jci.co.id/jitie/article/view/820}
+}
+
+@misc{sadanandan2026cot,
+  author        = {Sadanandan, Binesh and Behzadan, Vahid},
+  title         = {When Chain-of-Thought Backfires: Evaluating Prompt Sensitivity in Medical Language Models},
+  howpublished  = {arXiv preprint},
+  year          = {2026},
+  eprint        = {2603.25960},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL}
+}
+
+@misc{theimerlienhard2026openmeditron,
+  author        = {Theimer-Lienhard, Xavier and El-Amin, Mushtaha and Elhassan, Fay and Vaidya, Sahaj and Cartier-Negadi, Victor and Sasu, David and Klein, Lars and Hartley, Mary-Anne},
+  title         = {Fully Open {Meditron}: An Auditable Pipeline for Clinical {LLMs}},
+  howpublished  = {arXiv preprint},
+  year          = {2026},
+  eprint        = {2605.16215},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+
+% ---------------------------------------------------------------------------------------------
+% Research integrity
+% ---------------------------------------------------------------------------------------------
+
+@article{errami2008tale,
+  author    = {Errami, Mounir and Garner, Harold},
+  title     = {A tale of two citations},
+  journal   = {Nature},
+  volume    = {451},
+  number    = {7177},
+  pages     = {397--399},
+  year      = {2008},
+  doi       = {10.1038/451397a}
+}

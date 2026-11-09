@@ -1,0 +1,35 @@
+{
+ "rule": "levels",
+ "regime": "lm",
+ "selected": {
+  "AD": 0.2,
+  "DK": 0.2,
+  "RA": 0.05,
+  "HU": 0.05,
+  "RD": 0.2
+ },
+ "C_star": "DK",
+ "C_star_level": 0.2,
+ "RA_star": 0.05,
+ "criterion": "final validation NLL at seed 1; ties within 0.005 -> lower dose",
+ "deleted_unopened": [
+  "S2_AD@0.05_s1_best.json",
+  "S2_AD@0.05_s1_final.json",
+  "S2_AD@0.10_s1_best.json",
+  "S2_AD@0.10_s1_final.json",
+  "S2_DK@0.05_s1_best.json",
+  "S2_DK@0.05_s1_final.json",
+  "S2_DK@0.10_s1_best.json",
+  "S2_DK@0.10_s1_final.json",
+  "S2_HB@0.05_s1_best.json",
+  "S2_HB@0.05_s1_final.json",
+  "S2_HU@0.20_s1_best.json",
+  "S2_HU@0.20_s1_final.json",
+  "S2_RA@0.20_s1_best.json",
+  "S2_RA@0.20_s1_final.json",
+  "S2_RD@0.3_s1_best.json",
+  "S2_RD@0.3_s1_final.json",
+  "S2_RD@0.4_s1_best.json",
+  "S2_RD@0.4_s1_final.json"
+ ]
+}

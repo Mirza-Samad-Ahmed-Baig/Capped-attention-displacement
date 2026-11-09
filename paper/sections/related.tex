@@ -1,0 +1,115 @@
+% Related work and positioning. Wording follows the verified novelty synthesis (design/novelty/synthesis.md).
+\section{Related work}\label{sec:related}
+
+\paragraph{Stochastic attention regularizers}
+Several methods delete parts of the attention computation. DropAttention \citep{lin2019dropattention} and
+DropKey \citep{li2023dropkey} delete attention weights or keys, and AD-DROP \citep{yang2022addrop} deletes
+high-attribution positions. Scheduled DropHead \citep{zhou2020drophead} and LayerDrop \citep{fan2020reducing}
+remove heads or layers. DropHead acts on head outputs rather than attention rows, so it has no row
+displacement and we do not include it as an arm. Token-level masking \citep{wu2023tlm} and UniDrop
+\citep{wu2021unidrop} combine several such perturbations. \citet{luo2021dropout} erase the
+entries above a fraction of the row maximum and renormalize. This is the closest precedent for our top-$k$
+deletion candidate, which our earlier preprint \citep{baig2025attentiondrop} also used, without a budget.
+Other methods inject noise into the attention weights: Bayesian Attention Modules \citep{fan2020bam} and
+adaptive noise-augmented attention \citep{amirahmadi2025anaa}. R-Drop \citep{liang2021rdrop} regularizes
+through consistency between two perturbed passes, and Mixout \citep{lee2020mixout} through mixing with the
+pretrained parameters. All of these set their strength by a nominal rate, threshold or noise scale, so
+the realized displacement of a row depends on how the row distributes its mass. \citet{wang2024loradropout} unify transformer dropout variants and show that DropKey and DropAttention
+with normalized rescaling share a forward pass, but they compare methods at equal nominal rates.
+\citet{wu2021notall} note the case in which pre-softmax masking drops every key, which needs a
+fallback. Our displacement laws state such conventions explicitly, and we compare families at matched
+realized total-variation (TV) distance rather than at matched nominal rate.
+
+\paragraph{Mixing attention with a reference distribution}
+Relaxed Attention \citep{lohrenz2021relaxed,lohrenz2023relaxed} mixes each row with the uniform
+distribution $u$ using a constant coefficient. Its authors report that a coefficient learned per block
+collapses towards zero, and they also try drawing the coefficient at random (``fuzzy relaxation'').
+\citet{maekaku2022attention} extend it to learnable and previous-layer priors, with an
+interpolation weight predicted per time step by a learned gate during training and inference.
+\citet{utkin2022attention} form attention weights for random forests as an
+$\epsilon$-contamination of the softmax. A fixed coefficient $\gamma$ bounds the displacement by $\gamma$,
+but the displacement it actually produces, $\gamma\,\mathrm{TV}(a,u)$, still varies from row to row. Our TV-budgeted
+relaxation fixes the displacement instead and computes the coefficient in closed form. The two rules
+belong to one mixture family, and neither is a special case of the other: fixed-$\gamma$ Relaxed
+Attention corresponds to the row-specific budget $\tau_{\mathrm{row}}=\gamma\,\mathrm{TV}(a,u)$.
+Row-adaptive coefficients are not new in themselves. Sinkhorn normalization \citep{sander2022sinkformers} changes the
+attention operator itself rather than perturbing it during training.
+
+\paragraph{TV and mass budgets on attention}
+Per-row TV budgets on attention already exist for inference-time sparsification. \citet{tzachristas2025topk} prove that the TV distance between a row and its renormalized top-$k$
+truncation equals the discarded mass. They bound the output error by this distance times a value
+diameter, and they choose $k$ to meet a prescribed TV budget. We use both facts and credit them.
+Twilight \citep{lin2025twilight} prunes to a top-$p$ mass budget, and KV-cache eviction uses the dropped
+mass as a certificate \citep{shi2026trustmass}. TV distance between attention distributions also serves as a
+stability criterion for attention explanations \citep{jain2019attention,hu2023seat}. Adversarial attention
+training bounds its perturbations in logit space \citep{kitada2021attention}, and the sensitivity of
+softmax attention has been characterized exactly \citep{emadi2026exact} and through Lipschitz bounds
+\citep{kim2021lipschitz}. Norm-based analyses show that attention weights alone do not determine a head's
+effect, because the values matter \citep{kobayashi2020attention}, which is why we also measure
+value-weighted displacement. Among the work we searched, none caps the realized per-row displacement of
+a stochastic perturbation applied during training.
+
+\paragraph{Clipping, trust regions and realized strength}
+The coefficient $\alpha$ of Eq.~\eqref{eq:cap} is radial norm clipping \citep{koloskova2023revisiting} of the
+displacement $b-a$ in the TV norm. It is not a Euclidean projection. Per-example clipping bounds each
+example's contribution in differentially private training \citep{abadi2016deep}. The linearity of TV
+along a mixture segment underlies conservative policy iteration \citep{kakade2002approximately}, and trust
+regions and ratio clipping bound policy updates \citep{schulman2015trpo,schulman2017ppo}. Setting a perturbation by its
+induced effect instead of its nominal parameter also has precedents:
+\begin{itemize}
+\item parameter-space noise adapted to a target distance between output distributions \citep{plappert2018parameter};
+\item clipping thresholds adapted to a target unclipped fraction \citep{andrew2021adaptive};
+\item DropBlock's correction of its seed rate to a realized drop rate \citep{ghiasi2018dropblock}.
+\end{itemize}
+Our dose identities are standard. The derivative of a limited expected value is the survival function
+\citep{halliwell2012excess}, and a variable in $[0,\tau]$ has a second moment of at most $\tau$ times its mean
+\citep{bartlett2005local}. The minimality of truncation in convex order is the classical optimality of
+stop-loss truncation \citep{ohlin1969class,kaas2008modern}. We claim none of these as mathematical
+contributions.
+
+\paragraph{Mean versus tail of perturbations}
+Classical analyses view training with small input noise as Tikhonov regularization \citep{bishop1995training} and
+dropout as an adaptive quadratic penalty \citep{wager2013dropout}. Both are second-order accounts in
+which the dispersion of the perturbation matters as well as its mean; Section~\ref{sec:theory} uses
+the same kind of expansion as a heuristic only. Fuzzy relaxation \citep{lohrenz2023relaxed} varies the spread of
+the mixing coefficient around a fixed mean in image classification and finds no significant difference
+over five seeds. Bayesian Attention Modules \citep{fan2020bam} compare Weibull and lognormal attention noise
+matched in mean unnormalized weight. Outside attention, truncating heavy-tailed gradient noise changes which
+minima SGD reaches \citep{wang2022eliminating}. None of these matches the realized displacement or truncates
+its tail. None of them tests a capped against an uncapped perturbation of the same candidate at matched mean
+displacement, or repeats such a test across from-scratch language models, fine-tuned encoders and distilled
+students.
+
+\paragraph{Attention concentration}
+Trained transformers put much of their attention on a few tokens: separator and special tokens
+\citep{clark2019bert}, attention sinks \citep{xiao2024sinks,gu2025sinks}, high-norm artifact tokens in vision transformers
+\citep{darcet2024registers} and massive activations \citep{sun2024massive}. This concentration is what makes
+targeted deletion heavy-tailed. We use it only as motivation, and we measure the share of deleted mass that
+falls on special tokens rather than assuming a mechanism.
+
+\paragraph{Low-resource biomedical fine-tuning}
+Fine-tuning a pretrained encoder on a small dataset is unstable across random seeds, and bias-corrected
+optimization with longer training reduces this instability \citep{dodge2020finetuning,mosbach2021stability,zhang2021revisiting}.
+On PubMedQA \citep{jin2019pubmedqa}, domain-specific pretraining \citep{gu2021domain,yasunaga2022linkbert} and
+careful fine-tuning \citep{tinn2023finetuning} set strong encoder baselines, and compact biomedical
+models are obtained by distillation \citep{hinton2015distilling,rohanian2023compact}. A teacher that sees information
+unavailable to the student is an instance of learning using privileged information
+\citep{vapnik2009new,lopezpaz2016unifying}. Low-rank adaptation \citep{hu2022lora} and label smoothing \citep{muller2019label}
+appear here as a recipe reference point and a tuned control.
+
+\paragraph{Evidence use on PubMedQA}
+Question-only and hypothesis-only baselines expose annotation artifacts
+\citep{gururangan2018annotation,poliak2018hypothesis,kaushik2018reading}. On PubMedQA the following have been reported:
+question-only evaluation of the PQA-L test set for prompted LLMs \citep{lala2023paperqa,xiong2024mirage},
+including section-restricted contexts \citep{sadanandan2026cot};
+random-context evaluation for prompted LLMs \citep{wen2024characterizing};
+a TF-IDF and linear-SVM question-only classifier trained on PQA-L, at 55.4\% accuracy \citep{huang2025selfreflective};
+a fine-tuned LLM baseline without documents on an unspecified PubMedQA subset \citep{zhang2024raft};
+and question-only inference on PQA-L by LLMs trained on other corpora \citep{xiao2025kailin}.
+We apply question-only, label-differing mismatched-abstract and RESULTS-deletion probes to the same fine-tuned
+encoders under the reasoning-required protocol, and we train a question-only reference model under that
+protocol. Earlier overlap analyses match PubMed identifiers across datasets \citep{fries2022bigbio} or apply
+generic $n$-gram decontamination \citep{theimerlienhard2026openmeditron}. Duplicate publication in MEDLINE is a
+known phenomenon \citep{errami2008tale}, and the unlabelled PubMedQA subset has been used for training
+\citep{luo2022biogpt}. We therefore report the two unlabelled records that duplicate official test questions
+under different identifiers.

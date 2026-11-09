@@ -1,0 +1,1 @@
+{"utc": "2026-11-03T15:00:57+00:00", "run_id": "E5_AD@0.20_f4", "event": "run stopped mid-training (about 5 of 22 minutes) at the authors request because the laptop was being closed; no result, sealed or partial file written; rerun once from scratch with the same seed on resume", "files_deleted": []}

@@ -1,0 +1,9 @@
+# Versions used for every run reported in the paper (Python 3.12.10)
+torch==2.13.0          # CUDA 12.6 build
+transformers==4.57.6
+tokenizers==0.22.2
+safetensors==0.7.0
+huggingface_hub==0.36.2
+numpy==2.5.0
+scipy==1.18.0
+matplotlib==3.11.1

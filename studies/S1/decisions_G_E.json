@@ -1,0 +1,11 @@
+{
+ "rule": "G_E",
+ "runs": [
+  "S1_N_f0",
+  "S1_N_f1",
+  "S1_AD@0.10_f0",
+  "S1_AD@0.10_f1"
+ ],
+ "failed_or_collapsed": 1,
+ "action": "proceed"
+}

@@ -1,0 +1,142 @@
+% Displacement accounting: definitions, exact laws, and the TV cap. Outcome-independent.
+\section{Displacement accounting for attention perturbations}\label{sec:theory}
+
+\subsection{Setting}
+Fix an example, layer, head and query. Let $S$ be the set of visible keys ($n=|S|\ge 1$), let
+$a$ be the softmax distribution over $S$, and let $V=(v_j)_{j\in S}$ be the value vectors, so the
+head output is $z=\sum_j a_j v_j$. A training-time attention perturbation replaces $a$ by a random
+row $\tilde a$ drawn by a mechanism $\mathcal M$; evaluation always uses $a$. We call
+\begin{equation}
+ d=\tfrac12\lVert\tilde a-a\rVert_1
+\end{equation}
+the \emph{realized displacement}. When $\tilde a$ is a probability vector, $d=\mathrm{TV}(a,\tilde a)$.
+We summarize a mechanism on a row by its mean displacement $D=\mathbb E d$, second moment
+$S_2=\mathbb E d^2$, and train/evaluation \emph{mean shift} $B=\tfrac12\lVert\mathbb E\tilde a-a\rVert_1$.
+For a top-$k$ deletion candidate, $T\subseteq S$ denotes the $\min(k,n)$ keys with the largest logits,
+$A_k=\sum_{j\in T}a_j$ their mass, and $a_{\max}=\max_j a_j$.
+
+\subsection{Exact displacement laws}
+\begin{proposition}[Deletion identity]\label{prop:deletion}
+Let $b$ be the renormalization of $a$ after deleting a set $D\subsetneq S$ with mass $m=\sum_{j\in D}a_j<1$.
+Then $\mathrm{TV}(a,b)=m$.
+\end{proposition}
+This identity is known from inference-time top-$k$ sparsification, where the discarded tail mass bounds the
+approximation error \citep{tzachristas2025topk}; we use it for training-time perturbations.
+\begin{proof}
+Deleted coordinates change by $a_j$ in total $m$. Retained coordinates increase from $a_j$ to
+$a_j/(1-m)$, a total increase of $\sum_{j\notin D}a_j\,m/(1-m)=m$. Half the $\ell_1$ change is $m$.
+\end{proof}
+
+\begin{proposition}[Mean displacement by family]\label{prop:laws}
+With independent deletion proposals of probability $p$:
+\begin{enumerate}
+\item \textbf{Post-softmax attention dropout} with $\tilde a_j=a_jM_j/(1-p)$ and $M_j\sim\mathrm{Bernoulli}(1-p)$:
+$D=p$ exactly and $B=0$, independently of $a$. Rows are not normalized, and
+\[
+S_2=\tfrac14\Bigl[\Bigl(p+\tfrac{p^2}{1-p}\Bigr)\textstyle\sum_ja_j^2+4p^2\bigl(1-\sum_ja_j^2\bigr)\Bigr].
+\]
+\item \textbf{Independent key deletion} (DropKey-style, all visible keys eligible, argmax restored if all
+are deleted): $D=\mathbb E m=p-p^{n}a_{\max}$ and
+$\mathbb E m^2=p^2+p(1-p)\sum_ja_j^2-p^{n}\bigl[1-(1-a_{\max})^2\bigr]$.
+\item \textbf{Top-$k$ deletion} (same fallback): $D=\mathbb E m=pA_k-\mathbf 1\{n\le k\}\,p^{n}a_{\max}$.
+\item \textbf{Relaxed Attention} ($\tilde a=(1-\gamma)a+\gamma u$, $u$ uniform on $S$): $d=\gamma\,\mathrm{TV}(a,u)$,
+deterministic, so $S_2=d^2$ and $B=d$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(1) Coordinate $j$ contributes $a_j$ when dropped (probability $p$) and $a_jp/(1-p)$ when kept, so
+$\mathbb E|\tilde a_j-a_j|=2pa_j$ and $D=p\sum_ja_j=p$; $\mathbb E\tilde a_j=a_j$. The second moment
+follows by expanding $d^2=\tfrac14(\sum_ja_jc_j)^2$ with independent $c_j$, $\mathbb Ec_j=2p$ and
+$\mathbb Ec_j^2=p+p^2/(1-p)$.
+(2)--(3) By Proposition~\ref{prop:deletion}, $d=m$ for every realized deletion set. Linearity of
+expectation gives $p\sum a_j$ over eligible keys; the fallback occurs only when all $n$ visible keys
+are eligible and proposed (probability $p^n$) and restores mass $a_{\max}$. The second moment in (2)
+is the variance of a Bernoulli-weighted sum plus the same fallback correction.
+(4) is immediate.
+\end{proof}
+
+The individual expressions are elementary and several are known (inverted dropout is unbiased; deletion
+moves the deleted mass; the all-deleted case needs an explicit convention)
+\citep{srivastava2014dropout,li2023dropkey,wu2021notall,wang2024loradropout}. What is new here is using them
+as a common axis on which to compare families. Proposition~\ref{prop:laws} explains why nominal rates are not comparable across families. For
+dropout the rate \emph{is} the displacement; for deletion the displacement is $p$ times the mass of
+the targeted keys, which varies by orders of magnitude between diffuse and concentrated heads. For
+dropout and independent key deletion $D\approx p$, so the statement ``rate is not displacement'' is
+specific to targeted deletion and to Relaxed Attention.
+
+\subsection{The TV cap}
+Given a candidate row $b$ with $r=\mathrm{TV}(a,b)$ and a budget $\tau\in[0,1]$, the capped mixture is
+\begin{equation}\label{eq:cap}
+ \tilde a=(1-\alpha)a+\alpha b,\qquad \alpha=\min\{1,\tau/r\}\ \ (\alpha=0\text{ if }r=0).
+\end{equation}
+With the top-$k$ deletion candidate we call this CapDrop; with $b=u$ we call it TV-budgeted relaxation (RB).
+Fixed-$\gamma$ Relaxed Attention \citep{lohrenz2021relaxed,lohrenz2023relaxed} uses the same mixture with a
+constant coefficient; it corresponds to the row-specific budget $\tau_{\mathrm{row}}=\gamma\,\mathrm{TV}(a,u)$, so
+neither rule is a special case of the other. Input-dependent smoothing weights have been learned before
+\citep{maekaku2022attention}; ours is fixed in closed form by a displacement budget and is not learned. The
+coefficient $\alpha$ is radial norm clipping \citep{koloskova2023revisiting} of the displacement $b-a$ in the
+TV norm: the novelty lies in the quantity it fixes during training, not in its functional form.
+
+\begin{proposition}[Cap identities]\label{prop:cap}
+For every candidate supported on $S$:
+(i) $\tilde a$ is supported on $S$ and sums to one;
+(ii) $\mathrm{TV}(a,\tilde a)=\min(r,\tau)$;
+(iii) $\mathrm{TV}(b,\tilde a)=(r-\tau)_+$, i.e.\ the capped and uncapped perturbed rows differ by exactly the clipped excess;
+(iv) for values of diameter $D_V=\max_{j,l}\lVert v_j-v_l\rVert$, $\lVert\tilde z-z\rVert\le D_V\min(r,\tau)$, and the constant is sharp;
+(v) if the deletion proposals are Bernoulli$(p)$ on the $k$ eligible keys, $\Pr(m>\tau)\le 1-(1-p)^{k}$.
+\end{proposition}
+\begin{proof}
+(i) Convex combinations of distributions on $S$ stay on $S$. (ii) By homogeneity of the norm,
+$\mathrm{TV}(a,\tilde a)=\alpha r=\min(r,\tau)$. (iii) $b-\tilde a=(1-\alpha)(b-a)$, so the distance is
+$(1-\alpha)r=(r-\tau)_+$. (iv) Write $w=\tilde a-a$ with positive and negative parts of equal mass
+$s=\mathrm{TV}(a,\tilde a)$. Then $\sum_jw_jv_j=s(\mu_+-\mu_-)$ with $\mu_\pm$ convex combinations of the values,
+whose distance is at most $D_V$ (the same bound appears for top-$k$ truncation in \citet{tzachristas2025topk}).
+Moving mass $s$ between two values at distance $D_V$ attains equality.
+(v) $m>0$ requires at least one proposal among $k$ keys.
+\end{proof}
+
+\begin{proposition}[Marginal dose and tail truncation; standard facts]\label{prop:dose}
+For a random deleted mass $m$ with law independent of $\tau$
+\citep[cf.][]{halliwell2012excess,bartlett2005local}:
+(i) the right derivative of $\tau\mapsto\mathbb E\min(m,\tau)$ is $\Pr(m>\tau)$, and it is the derivative at every
+continuity point of the law of $m$;
+(ii) $\mathbb E\min(m,\tau)^2\le\tau\,\mathbb E\min(m,\tau)$;
+(iii) $\mathbb E\min(m,\tau)+\mathbb E(m-\tau)_+=\mathbb Em$.
+\end{proposition}
+\begin{proof}
+Part (i) follows from $\mathbb E\min(m,\tau)=\int_0^\tau\Pr(m>s)\,ds$, part (ii) from $\min(m,\tau)\le\tau$, and
+part (iii) from $\min(x,\tau)+(x-\tau)_+=x$.
+\end{proof}
+The measured activation probability $\Pr(m>\tau)$ is therefore exactly the marginal realized dose per unit of
+budget. For fixed attention rows the census (Section~\ref{sec:census}) computes it without sampling error.
+
+\begin{proposition}[Convex-order minimality of truncation]\label{thm:cx}
+Let $m\ge0$ be the deleted mass of a candidate and let $d$ be the realized displacement of any mechanism
+with $0\le d\le m$ pathwise and $\mathbb Ed=\ell$. Let $\tau_\ell$ satisfy $\mathbb E\min(m,\tau_\ell)=\ell$. Then
+$\min(m,\tau_\ell)\le_{\mathrm{cx}}d$: $\mathbb E\,\phi(\min(m,\tau_\ell))\le\mathbb E\,\phi(d)$ for every convex $\phi$.
+In particular $S_2(\text{CapDrop})\le S_2$ of every such mechanism at the same mean displacement.
+\end{proposition}
+This is the classical optimality of stop-loss truncation in convex order from actuarial risk theory
+\citep[Sect.~4, Theorem, via Lemma~2]{ohlin1969class}; see also \citet[Sects.~1.4 and 7.4.4]{kaas2008modern}.
+Ohlin states it for retentions that are functions of the loss. The argument, reproduced below, needs only
+$0\le d\le m$ and equal means, so it covers randomized mechanisms. We do not claim it as a new result; we use it to
+define the matched-mean contrast between capped and uncapped perturbations.
+\begin{proof}
+Both variables have mean $\ell$, so convex order is equivalent to $\mathbb E(X-t)_+\le\mathbb E(Y-t)_+$ for all $t$,
+with $X=\min(m,\tau_\ell)$ and $Y=d$. For $t\ge\tau_\ell$ the left side is zero. For $t<\tau_\ell$,
+$\min(X,t)=\min(m,t)$, hence $\mathbb E(X-t)_+=\ell-\mathbb E\min(m,t)\le\ell-\mathbb E\min(d,t)=\mathbb E(Y-t)_+$,
+using $d\le m$.
+\end{proof}
+The fixed-$\alpha$ mixture of the same candidate ($d=\gamma m$, arm HF) belongs to the class of
+Proposition~\ref{thm:cx}; so does unbudgeted deletion at a lower rate under common random numbers
+(nested deletion sets), except on rows where the all-deleted fallback applies. At matched mean
+displacement the three arms therefore differ in dispersion (and in mean shift $B$), and CapDrop
+is the extreme point. This is the precise sense in which the cap ``removes the tail''.
+
+\paragraph{What the theory does not give.} The statements are exact but local: they concern one
+attention row with fixed values. A second-order expansion of the loss in the head output,
+$\mathbb E\ell(z+\Delta z)-\ell(z)\approx\nabla\ell^\top\mathbb E\Delta z+\tfrac12\mathbb E\Delta z^\top H\Delta z$ with
+$\lVert\mathbb E\Delta z\rVert\le D_VB$ and $\mathbb E\lVert\Delta z\rVert^2\le D_V^2S_2$, motivates tracking $B$ and $S_2$ but
+is a heuristic: it ignores interactions across layers and the training dynamics. Whether lower $S_2$ at matched $D$
+helps or hurts generalization is an empirical question, which Section~\ref{sec:design} tests with preregistered
+predictions. The gradient of \eqref{eq:cap} flows through $\alpha$; the fixed-$\alpha$ control does not have this path.

@@ -1,0 +1,42 @@
+{
+ "rule": "levels",
+ "regime": "encoder",
+ "selected": {
+  "AD": 0.2,
+  "DK": 0.05,
+  "RA": 0.05,
+  "HU": 0.05,
+  "MX": 0.9,
+  "LS": 0.2
+ },
+ "C_star": "LS",
+ "C_star_level": 0.2,
+ "RA_star": 0.05,
+ "criterion": "mean dev Brier over folds 0-1 (100 examples); ties within 0.005 -> lower dose",
+ "deleted_unopened": [
+  "S1_AD@0.10_f0.json",
+  "S1_AD@0.10_f1.json",
+  "S1_AD@0.05_f0.json",
+  "S1_AD@0.05_f1.json",
+  "S1_DK@0.10_f0.json",
+  "S1_DK@0.10_f1.json",
+  "S1_DK@0.20_f0.json",
+  "S1_DK@0.20_f1.json",
+  "S1_HB@0.05_f0.json",
+  "S1_HB@0.05_f1.json",
+  "S1_HB@0.20_f0.json",
+  "S1_HB@0.20_f1.json",
+  "S1_HU@0.20_f0.json",
+  "S1_HU@0.20_f1.json",
+  "S1_LS@0.05_f0.json",
+  "S1_LS@0.05_f1.json",
+  "S1_LS@0.1_f0.json",
+  "S1_LS@0.1_f1.json",
+  "S1_MX@0.5_f0.json",
+  "S1_MX@0.5_f1.json",
+  "S1_MX@0.7_f0.json",
+  "S1_MX@0.7_f1.json",
+  "S1_RA@0.20_f0.json",
+  "S1_RA@0.20_f1.json"
+ ]
+}

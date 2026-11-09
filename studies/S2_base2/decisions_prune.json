@@ -1,0 +1,11 @@
+{
+ "utc": "2026-09-27T07:52:08.089692+00:00",
+ "rule": "unselected base-LR tuning runs: sealed test files deleted unopened (PROTOCOL A 3.0)",
+ "kept": "S2_base2_N_lr5e-4_s1",
+ "deleted_unopened": {
+  "S2_base2_N_lr1e-3_s1_best.json": "c50af1f07fb86a90be10b287aab93c779bb714d82ec41d1b32c46183185645c2",
+  "S2_base2_N_lr1e-3_s1_final.json": "18de054579fda18561058ce9bab9d1a3194891fa6caa926324e93e0e89f1cdbe",
+  "S2_base2_N_lr2e-3_s1_best.json": "a6a173e961cdceaa31b3e81adcc1035430cd8f7db677ac48e7ec7051a2b71816",
+  "S2_base2_N_lr2e-3_s1_final.json": "199bdb2c5960ce67969457131dcaf7955856a013343d389468215bc150f92a1f"
+ }
+}

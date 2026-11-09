@@ -1,0 +1,33 @@
+{
+ "utc": "2026-09-29T11:07:14.580452+00:00",
+ "script": "probe_lm_checkpoint.py",
+ "script_sha256": "08ea979175fdf63e49958f85f48db1e57b2af806645008e2c8d5b279a88645d2",
+ "inputs": "random tokens, seed 999 (outcome-blind)",
+ "free_vram_gib": 3.21,
+ "results": {
+  "RB": {
+   "no_ckpt_peak_gib": 3.07,
+   "ckpt_peak_gib": 1.0,
+   "loss_equal": true,
+   "max_abs_grad_diff": 0.0,
+   "realized_tv_equal": true
+  },
+  "DB": {
+   "no_ckpt": "OOM",
+   "ckpt_peak_gib": 1.083
+  },
+  "HB": {
+   "no_ckpt_peak_gib": 2.939,
+   "ckpt_peak_gib": 1.165,
+   "loss_equal": true,
+   "max_abs_grad_diff": 0.0,
+   "realized_tv_equal": true
+  }
+ },
+ "full_step_with_optimizer_peak_gib": {
+  "HB": 2.951,
+  "RB": 3.279,
+  "RA": 2.431
+ },
+ "smoke": "lm_runner.py on a scratch study (seed 999, 20 steps, no test): RB peak 1.174 GiB, DB peak 1.215 GiB"
+}

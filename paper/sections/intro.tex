@@ -1,0 +1,89 @@
+% Introduction. Results-dependent sentences were written only after the single unseal, from results/analysis.json.
+\section{Introduction}\label{sec:intro}
+
+Stochastic perturbation of attention is a common regularizer for transformers
+\citep{vaswani2017attention}. Attention-probability dropout, DropAttention \citep{lin2019dropattention},
+DropKey \citep{li2023dropkey}, DropHead \citep{zhou2020drophead} and Relaxed Attention
+\citep{lohrenz2021relaxed,lohrenz2023relaxed} are all specified by a nominal parameter: a drop rate $p$
+or a mixing coefficient $\gamma$. For a single head, however, the forward pass is changed by the
+\emph{realized} displacement of the attention row, $d=\tfrac12\lVert\tilde a-a\rVert_1$. If the values
+have diameter $D_V$, the head output moves by at most $D_V d$ (Section~\ref{sec:theory}). How large $d$ is
+for a given rate depends on how the row distributes its mass. For attention dropout the expected
+displacement equals the rate. For targeted deletion it is the rate times the mass of the targeted keys.
+In the pretrained BiomedBERT encoder \citep{gu2021domain}, the four highest-weighted keys hold
+6.9\% of a row's mass at the 5th percentile of rows and 97\% at the 95th. The same top-4 deletion rate
+therefore displaces some rows about fourteen times more than others, and on concentrated rows the displacement
+is heavy-tailed.
+
+This has two consequences. First, comparing families at equal nominal rates confounds the family with
+the dose it delivers. Second, a nominal rate controls neither the mean nor the tail of the displacement.
+We study a direct way to set the displacement instead. Given any candidate perturbed row $b$, the
+capped mixture $\tilde a=(1-\alpha)a+\alpha b$ with $\alpha=\min\{1,\tau/\mathrm{TV}(a,b)\}$ displaces
+every row by exactly $\min\{\mathrm{TV}(a,b),\tau\}$. With a top-$k$ deletion candidate we call this
+CapDrop. It keeps the deletion events of the candidate and removes the part of the displacement above $\tau$.
+The coefficient is radial norm clipping \citep{koloskova2023revisiting} of the displacement $b-a$ in the
+total-variation (TV) norm. The operator is standard. What we add is the quantity it fixes during
+training, and a test of whether fixing it matters.
+
+That test needs a comparison at matched mean displacement, because otherwise any effect of the cap
+could be an effect of a smaller dose. Among all mechanisms whose displacement lies pathwise between
+zero and that of the candidate and has a given mean, truncation is minimal in convex order. This is
+the classical optimality of stop-loss truncation \citep{ohlin1969class,kaas2008modern}, and it makes
+CapDrop the least dispersed member of that class. A fixed-coefficient mixture of the same candidate
+belongs to the same class. Comparing the two at the same realized mean displacement, with the same
+deletion draws, isolates the tail of the displacement from its mean and from the candidate.
+
+We run this comparison in two data-limited biomedical regimes where attention regularization is
+plausibly relevant and fine-tuning is known to be fragile \citep{mosbach2021stability,dodge2020finetuning,zhang2021revisiting}.
+The first (S1) is BiomedBERT fine-tuned on 450 expert-labelled PubMedQA questions per fold
+\citep{jin2019pubmedqa}. The second (S2) is a small causal language model trained from scratch for
+many epochs on a fixed PubMed corpus, a data-constrained setting \citep{muennighoff2023scaling}. Every
+arm is calibrated to the same realized mean displacement, using a census of attention rows taken
+before any outcome was observed. The study was preregistered with frozen code, data manifests and
+analysis. Test labels and the language-model test stream were sealed and are used once, after every
+declared run is complete, and every run is reported.
+
+\paragraph{Contributions}
+\begin{enumerate}
+\item \textbf{Displacement accounting.} We give exact expressions for the expected realized displacement of
+attention dropout, independent and top-$k$ key deletion and Relaxed Attention, together with the
+second moments and the train/evaluation mean shift where these have closed forms
+(Propositions~\ref{prop:deletion}--\ref{prop:laws}). We use realized displacement, rather than
+nominal rate, as the axis on which families are compared. The individual identities are elementary,
+and several are known.
+\item \textbf{A TV cap for training-time perturbations.} For CapDrop and for TV-budgeted relaxation we
+state the cap identities, the per-row output bound and the reading of $\tau$ as a dose whose
+marginal effect is the measurable activation rate $\Pr(m>\tau)$ (Propositions~\ref{prop:cap}--\ref{thm:cx}).
+The cap is closed form and adds $O(n)$ operations per row to the candidate.
+\item \textbf{A preregistered, displacement-calibrated test.} A $2\times2$ design crosses the candidate
+(uniform or deletion) with the mixing rule (fixed or capped). It is run alongside calibrated dropout,
+DropKey and unbudgeted deletion, and tuned non-attention controls, in both regimes. Six confirmatory
+contrasts use exact tests with Holm correction and equivalence margins, and claims follow a table of
+outcomes fixed in advance. Declared extensions, run in a fixed order within a fixed compute budget,
+cover a second seed, a fragile fine-tuning recipe, a second encoder, a second biomedical task,
+R-Drop, budgeted DropKey, distilled students and a stop-gradient ablation of the cap. All of them completed within the budget, except a
+single-epoch LM extension that did not fit.
+\item \textbf{Evidence-use diagnostics and data hygiene for PubMedQA.} We evaluate every fine-tuned
+model with the question only, with a label-differing mismatched abstract, and with the RESULTS
+section deleted. We report these next to a question-only model trained under the same protocol. We also
+document two unlabelled PubMedQA records that duplicate official test questions under different
+PubMed identifiers.
+\end{enumerate}
+
+The results support a narrow claim. In the data-limited language model, CapDrop beat fixed-coefficient deletion by
+0.045 nats/token at the same mean displacement and with the same deletion draws. It beat tuned Relaxed Attention by 0.032 nats/token
+(both Holm-adjusted, on all ten seeds). We had registered the opposite expectation for this regime. A
+stop-gradient ablation attributes about a fifth of the first difference to the gradient through the cap, and the
+rest to the capped perturbation itself. The strongest tuned control, DropKey at twice the mean displacement, was better
+than CapDrop by 0.058 nats/token, and we report this as a cost of the method. In PubMedQA fine-tuning, the
+confirmatory contrasts were inconclusive, and no attention regularizer improved on the unregularized model. The only
+significant difference, in favour of label smoothing, was a calibration effect that temperature scaling removed. The extensions did not
+change this picture. Following the outcome table fixed before the study, we claim that the tail of the displacement
+matters at a fixed mean in the language-model regime. We do not claim that capping is the active ingredient of
+attention regularization in general.
+
+The top-$k$ deletion candidate comes from our earlier preprint \citep{baig2025attentiondrop}, which had no
+displacement budget. The budget, the displacement accounting, the calibration and all experiments reported
+here are new. Section~\ref{sec:related} positions the work. Section~\ref{sec:theory} develops the accounting,
+and Section~\ref{sec:design} gives the preregistered design. Sections~\ref{sec:results}--\ref{sec:discussion}
+report and discuss the results.
