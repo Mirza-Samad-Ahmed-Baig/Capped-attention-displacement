@@ -1,0 +1,2 @@
+# Keep every file byte-identical, so the SHA-256 values in FREEZE.json / FREEZE_ADDENDUM.jsonl verify on any OS
+* -text
